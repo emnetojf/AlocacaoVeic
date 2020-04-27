@@ -1,8 +1,11 @@
+using AlocacaoVeic.Dominio.Contratos;
+using AlocacaoVeic.Repositorio.Contexto;
+using AlocacaoVeic.Repositorio.Repositorios;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,6 +24,21 @@ namespace AlocacaoVeic.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            //.AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services.AddSession();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+
+            
+            var connectionString = Configuration.GetConnectionString("AlocacaoDB");
+            services.AddDbContext<AlocacaoContext>(options =>
+                    options.UseOracle (connectionString, m => m.MigrationsAssembly("AlocacaoVeic.Repositorio")));
+                   
+            
+            services.AddScoped<IUsuarioRepos, UsuarioRepos>();
+            services.AddScoped<IClienteRepos, ClienteRepos>();
+            services.AddScoped<IVeiculoRepos, VeiculoRepos>();
+            services.AddScoped<IAlocacaoRepos, AlocacaoRepos>();            
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
