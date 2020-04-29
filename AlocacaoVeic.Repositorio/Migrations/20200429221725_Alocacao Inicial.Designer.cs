@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlocacaoVeic.Repositorio.Migrations
 {
     [DbContext(typeof(AlocacaoContext))]
-    [Migration("20200429164317_Alocacao Inicial")]
+    [Migration("20200429221725_Alocacao Inicial")]
     partial class AlocacaoInicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,15 +27,11 @@ namespace AlocacaoVeic.Repositorio.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ClienteID");
-
                     b.Property<int>("FormaPagto");
 
                     b.Property<int>("PagtoID");
 
-                    b.Property<int>("UserID");
-
-                    b.Property<int?>("UsuarioidUser");
+                    b.Property<int>("UsuarioID");
 
                     b.Property<int>("VeiculoID");
 
@@ -45,9 +41,7 @@ namespace AlocacaoVeic.Repositorio.Migrations
 
                     b.HasKey("idAlocacao");
 
-                    b.HasIndex("ClienteID");
-
-                    b.HasIndex("UsuarioidUser");
+                    b.HasIndex("UsuarioID");
 
                     b.HasIndex("VeiculoID");
 
@@ -113,6 +107,8 @@ namespace AlocacaoVeic.Repositorio.Migrations
                         .IsRequired()
                         .HasMaxLength(400);
 
+                    b.Property<string>("strNomeArq");
+
                     b.Property<string>("strPlaca")
                         .IsRequired()
                         .HasMaxLength(50);
@@ -124,17 +120,13 @@ namespace AlocacaoVeic.Repositorio.Migrations
 
             modelBuilder.Entity("AlocacaoVeic.Dominio.Entidades.Alocacao", b =>
                 {
-                    b.HasOne("AlocacaoVeic.Dominio.Entidades.Cliente", "Cliente")
-                        .WithMany()
-                        .HasForeignKey("ClienteID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("AlocacaoVeic.Dominio.Entidades.Usuario", "Usuario")
                         .WithMany("Alocacoes")
-                        .HasForeignKey("UsuarioidUser");
+                        .HasForeignKey("UsuarioID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("AlocacaoVeic.Dominio.Entidades.Veiculo", "Veiculo")
-                        .WithMany("Alocacoes")
+                        .WithMany()
                         .HasForeignKey("VeiculoID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

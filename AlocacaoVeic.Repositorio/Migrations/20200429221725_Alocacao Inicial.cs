@@ -47,7 +47,8 @@ namespace AlocacaoVeic.Repositorio.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     strPlaca = table.Column<string>(maxLength: 50, nullable: false),
                     strModelo = table.Column<string>(maxLength: 400, nullable: false),
-                    douPreco = table.Column<double>(type: "float", nullable: false)
+                    douPreco = table.Column<double>(type: "float", nullable: false),
+                    strNomeArq = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -60,12 +61,10 @@ namespace AlocacaoVeic.Repositorio.Migrations
                 {
                     idAlocacao = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UsuarioID = table.Column<int>(nullable: false),
+                    VeiculoID = table.Column<int>(nullable: false),
                     dtInicio = table.Column<DateTime>(nullable: false),
                     dtFim = table.Column<DateTime>(nullable: false),
-                    ClienteID = table.Column<int>(nullable: false),
-                    VeiculoID = table.Column<int>(nullable: false),
-                    UserID = table.Column<int>(nullable: false),
-                    UsuarioidUser = table.Column<int>(nullable: true),
                     PagtoID = table.Column<int>(nullable: false),
                     FormaPagto = table.Column<int>(nullable: false)
                 },
@@ -73,17 +72,11 @@ namespace AlocacaoVeic.Repositorio.Migrations
                 {
                     table.PrimaryKey("PK_Alocacoes", x => x.idAlocacao);
                     table.ForeignKey(
-                        name: "FK_Alocacoes_Clientes_ClienteID",
-                        column: x => x.ClienteID,
-                        principalTable: "Clientes",
-                        principalColumn: "idCliente",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Alocacoes_Usuarios_UsuarioidUser",
-                        column: x => x.UsuarioidUser,
+                        name: "FK_Alocacoes_Usuarios_UsuarioID",
+                        column: x => x.UsuarioID,
                         principalTable: "Usuarios",
                         principalColumn: "idUser",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Alocacoes_Veiculos_VeiculoID",
                         column: x => x.VeiculoID,
@@ -93,14 +86,9 @@ namespace AlocacaoVeic.Repositorio.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Alocacoes_ClienteID",
+                name: "IX_Alocacoes_UsuarioID",
                 table: "Alocacoes",
-                column: "ClienteID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Alocacoes_UsuarioidUser",
-                table: "Alocacoes",
-                column: "UsuarioidUser");
+                column: "UsuarioID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Alocacoes_VeiculoID",

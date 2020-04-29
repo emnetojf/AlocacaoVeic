@@ -9,6 +9,10 @@
     <Compile Remove="Migrations\20200429162851_Alocacao Inicial.Designer.cs" />
     <Compile Remove="Migrations\20200429163831_Alocacao Inicial.cs" />
     <Compile Remove="Migrations\20200429163831_Alocacao Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20200429164317_Alocacao Inicial.cs" />
+    <Compile Remove="Migrations\20200429164317_Alocacao Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20200429205854_Alocacao Inicial Correcao.cs" />
+    <Compile Remove="Migrations\20200429205854_Alocacao Inicial Correcao.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
