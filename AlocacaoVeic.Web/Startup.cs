@@ -32,7 +32,7 @@ namespace AlocacaoVeic.Web
             
             var connectionString = Configuration.GetConnectionString("AlocacaoDB");
             services.AddDbContext<AlocacaoContext>(options =>
-                    options.UseOracle (connectionString, m => m.MigrationsAssembly("AlocacaoVeic.Repositorio")));
+                    options.UseSqlServer(connectionString, m => m.MigrationsAssembly("AlocacaoVeic.Repositorio")));
                    
             
             services.AddScoped<IUsuarioRepos, UsuarioRepos>();

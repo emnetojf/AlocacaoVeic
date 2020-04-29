@@ -1,4 +1,5 @@
 ﻿using AlocacaoVeic.Dominio.Entidades;
+using AlocacaoVeic.Repositorio.config;
 using Microsoft.EntityFrameworkCore;
 
 namespace AlocacaoVeic.Repositorio.Contexto
@@ -13,5 +14,17 @@ namespace AlocacaoVeic.Repositorio.Contexto
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Veiculo> Veiculos { get; set; }
         public DbSet<Alocacao> Alocacoes { get; set; }
-    }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new UsuarioConfig());
+            modelBuilder.ApplyConfiguration(new VeiculoConfig());
+            modelBuilder.ApplyConfiguration(new AlocacaoConfig());
+            modelBuilder.ApplyConfiguration(new ClienteConfig());
+
+            base.OnModelCreating(modelBuilder);
+        }
+
+    }    
 }
