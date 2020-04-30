@@ -32,8 +32,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\modelo\alocacao.ts" />
+    <None Remove="ClientApp\src\app\modelo\usuario.ts" />
+    <None Remove="ClientApp\src\app\modelo\veiculo.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AlocacaoVeic.Dominio\AlocacaoVeic.Dominio.csproj" />
     <ProjectReference Include="..\AlocacaoVeic.Repositorio\AlocacaoVeic.Repositorio.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\modelo\alocacao.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\modelo\veiculo.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\modelo\usuario.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
