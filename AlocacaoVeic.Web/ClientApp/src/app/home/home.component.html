@@ -1,7 +1,7 @@
 <br />
 <br />
 
-<div class="row" [ngClass]='{"show": isExpanded}' *ngIf="true">
+<div class="row" [ngClass]='{"show": isExpanded}' *ngIf="false">
   
     <img src="../../../assets/img/rent-cars.jpg" width="300" height="300" class="rounded mx-auto d-block" />
   
@@ -9,11 +9,11 @@
 
 
 
-<div class="row" [ngClass]='{"show": isExpanded}' style="text-align:center" *ngIf="false">
+<div class="row" [ngClass]='{"show": isExpanded}' style="text-align:center" *ngIf="true">
   <div class="col-lg-4">
     <div class="card border-0" style="border-0; width: 18rem;" [routerLinkActive]='["link-active"]'>
       <div class="card-body" style="text-align:center">
-        <a [routerLink]='["/fetch-data"]' class="card-img-top" style="text-decoration: none;">
+        <a [routerLink]='["/pesq-usr"]' class="card-img-top" style="text-decoration: none;">
           <img src="../../../assets/img/User-icon.png" width="200" height="200" />
           <h2 class="text-danger">Usuários</h2>
         </a>
@@ -24,7 +24,7 @@
   <div class="col-lg-4">
     <div class="card border-0" style="border-0; width: 18rem;" [routerLinkActive]='["link-active"]'>
       <div class="card-body" style="text-align:center">
-        <a [routerLink]='["/fetch-data"]' class="card-img-top" style="text-decoration:none; ">
+        <a [routerLink]='["/pesq-veic"]' class="card-img-top" style="text-decoration:none; ">
           <img src="../../../assets/img/icons-car.png" width="200" height="200" />
           <h2 class="text-danger">Veículos</h2>
         </a>
@@ -35,7 +35,7 @@
   <div class="col-lg-4">
     <div class="card border-0" style="width: 18rem;" [routerLinkActive]='["link-active"]'>
       <div class="card-body" style="text-align:center">
-        <a [routerLink]='["/fetch-data"]' class="card-img-top" style="text-decoration: none">
+        <a [routerLink]='["/pesq-aloc"]' class="card-img-top" style="text-decoration: none">
           <img src="../../../assets/img/Leasing.png" width="200" height="200" />
           <h2 class="text-danger">Alocações</h2>
         </a>

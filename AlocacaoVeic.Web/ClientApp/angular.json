@@ -145,5 +145,8 @@
       }
     }
   },
-  "defaultProject": "AlocacaoVeic.Web"
+  "defaultProject": "AlocacaoVeic.Web",
+  "cli": {
+    "analytics": "65a97d95-3e1e-4c40-ba5d-e4e111a9a45b"
+  }
 }
