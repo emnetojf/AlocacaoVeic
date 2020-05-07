@@ -1,2 +1,95 @@
-<h1>Cadastro usuario</h1>
 
+<div class="login-form">
+  <form>
+
+    <h1 class="h4" titulo>Cadastro do Usuário</h1>
+
+    <div class="form-group">
+      <!-- nome -->
+      <label for="inputNome" class="sr-only">Nome do Usuário</label>
+      <input type="text" name="nomeUsuario" id="inputNome" placeholder="Informe o nome do usuário"
+             class="mb-2 form-control"
+             [ngClass]="{
+              'is-invalid': nome.invalid && (nome.dirty || nome.touched),
+              'is-valid': nome.valid && (nome.dirty || nome.touched)
+           }"
+             [(ngModel)]="usuario.strNmUsuario"
+             #nome="ngModel"
+             required />
+      <div class="invalid-feedback mb-2" *ngIf="nome.invalid && (nome.dirty || nome.touched)" role="alert">
+        <div *ngIf="nome.errors.required">
+          Nome do usuáro deve ser preenchido!
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputEmail" class="sr-only">Email</label>
+      <input type="email" name="email" id="inputEmail" placeholder="Informe o email do usuário"
+             class="mb-2 form-control"
+             [ngClass]="{
+              'is-invalid': email.invalid && (email.dirty || email.touched),
+              'is-valid': email.valid && (email.dirty || email.touched)
+           }"
+             [(ngModel)]="usuario.strEmail"
+             #email="ngModel"
+             email
+             required />
+      <div class="invalid-feedback mb-2" *ngIf="email.invalid && (email.dirty || email.touched)" role="alert">
+        <div *ngIf="email.errors.required">
+          Email deve ser preenchido!
+        </div>
+        <div *ngIf="email.errors.email">
+          Email no formato inválido
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputSenha" class="sr-only">Senha</label>
+      <input type="password" name="password" id="inputSenha" placeholder="Informe a senha  do usuário"
+             class="mb-2 form-control"
+             [ngClass]="{
+              'is-invalid': senha.invalid && (senha.dirty || senha.touched),
+              'is-valid': senha.valid && (senha.dirty || senha.touched)
+           }"
+             [(ngModel)]="usuario.strSenha"
+             #senha="ngModel"
+             senha
+             required />
+      <div class="invalid-feedback mb-2" *ngIf="senha.invalid && (senha.dirty || senha.touched)" role="alert">
+        <div *ngIf="senha.errors.required">
+          Senha deve ser preenchido!
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputAdmin">Administrador?</label>
+      <input type="checkbox" name="admin" id="inputAdmin" class="mb-2" style="margin-left:5px; height:20px; width:20px;"            
+             [(ngModel)]="usuario.booADMIN"
+             #admin="ngModel" />
+    </div>
+
+    
+
+    <div class="form-group" style="text-align: right;">
+      <button class="btn btn-success" (click)="cadastrarUsuario()" [disabled]="ativar_spinner" style="margin-right:6px">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativar_spinner"></span>
+        Cadastrar
+      </button>
+      <button class="btn btn-danger" (click)="cancelarUsuario()">Cancelar</button>
+    </div>
+
+    <div class="form-group">
+      <div class="alert alert-danger col-md-4" *ngIf="msgErro">
+        {{msgErro}}
+      </div>
+      <div class="alert alert-success col-md-4" *ngIf="produtoCadastrado">
+        Usuário cadastrado com sucesso!
+      </div>
+    </div>
+
+  </form>
+
+</div>

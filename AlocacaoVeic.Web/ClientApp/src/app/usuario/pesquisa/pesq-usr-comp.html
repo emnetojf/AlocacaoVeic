@@ -1,3 +1,35 @@
-<h1>Pesquisa usuario</h1>
+<h1 class="h4 mb-4" titulo >Pesquisa usuario</h1>
 
-<button (click)="adicionaUsuario()" >Cadastrar Usuário</button>
+<button class="btn btn-primary mb-4" (click)="adicionaUsuario()">Cadastrar Usuário</button>
+
+
+<table class="table table-hover" *ngIf="usuarios">
+  <thead>
+    <tr>
+      <th>Usuário</th>
+      <th>Email</th>
+      <th>Admin</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let u of usuarios">
+      <td style="width:20%;">{{u.strNmUsuario}}</td>
+      <td style="width:40%;">{{u.strEmail}}</td>
+      <td>{{u.booADMIN}}</td>
+      <td><button class="btn btn-warning btn-sm" (click)="editarProduto(u)">Editar</button></td>
+      <td><button class="btn btn-danger btn-sm" (click)="deletarProduto(u)">Excluir</button></td>
+    </tr>
+  </tbody>
+
+
+</table>
+
+
+<p *ngIf="!produtos">
+  carregando usuários
+</p>
+
+

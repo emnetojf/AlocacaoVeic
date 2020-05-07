@@ -1,1 +1,97 @@
-<h1>Cadastro Veículo</h1>
+
+<div class="cad-form">
+  <form>
+
+    <h1 class="h4" titulo>Cadastro de Veículos</h1>
+
+    <div class="form-group">
+      <!-- placa -->
+      <label for="inputPlaca" class="sr-only">Placa</label>
+      <input type="text" name="placaVeiculo" id="inputPlaca" placeholder="Informe a placa do veículo"
+             class="mb-2 form-control"
+             [ngClass]="{
+              'is-invalid': placa.invalid && (placa.dirty || placa.touched),
+              'is-valid': placa.valid && (placa.dirty || placa.touched)
+           }"
+             [(ngModel)]="veiculo.strPlaca"
+             #placa="ngModel"
+             required />
+      <div class="invalid-feedback mb-2" *ngIf="placa.invalid && (placa.dirty || placa.touched)" role="alert">
+        <div *ngIf="placa.errors.required">
+          Placa do veículo deve ser preenchido!
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputModelo" class="sr-only">Email</label>
+      <input type="text" name="modelo" id="inputModelo" placeholder="Informe o modelo do veículo"
+             class="mb-2 form-control"
+             [ngClass]="{
+              'is-invalid': modelo.invalid && (modelo.dirty || modelo.touched),
+              'is-valid': modelo.valid && (modelo.dirty || modelo.touched)
+           }"
+             [(ngModel)]="veiculo.strModelo"
+             #modelo="ngModel"
+             modelo
+             required />
+      <div class="invalid-feedback mb-2" *ngIf="modelo.invalid && (modelo.dirty || modelo.touched)" role="alert">
+        <div *ngIf="modelo.errors.required">
+          Modelo do veículo deve ser preenchido!
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPreco" class="sr-only">Preço do Produto</label>
+      <input type="number" name="precoProduto" id="inputPreco" placeholder="Informe o preço do produto"
+             class="mb-2 col-md-4 form-control"
+             [ngClass]="{
+              'is-invalid': preco.invalid && (preco.dirty || preco.touched),
+              'is-valid': preco.valid && (preco.dirty || preco.touched)
+           }"
+             [(ngModel)]="produto.douPreco"
+             #preco="ngModel"
+             money-mask
+             required />
+      <div class="invalid-feedback mb-2" *ngIf="preco.invalid && (preco.dirty || preco.touched)" role="alert">
+        <div *ngIf="preco.errors.required">
+          Preço deve ser preenchido!
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-group mb-2">
+        <div class="custom-file col-md-4">
+
+          <input type="file" id="inputFile" class="custom-file-input" (change)="inputChange($event.target.files)" />
+          <label for="inputFile" class="custom-file-label">Escolha a foto do Veículo</label>
+
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="form-group" style="text-align: right;">
+      <button class="btn btn-success" (click)="cadastrarUsuario()" [disabled]="ativar_spinner" style="margin-right:6px">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativar_spinner"></span>
+        Cadastrar
+      </button>
+      <button class="btn btn-danger" (click)="cancelarUsuario()">Cancelar</button>
+    </div>
+
+    <div class="form-group">
+      <div class="alert alert-danger col-md-4" *ngIf="msgErro">
+        {{msgErro}}
+      </div>
+      <div class="alert alert-success col-md-4" *ngIf="produtoCadastrado">
+        Usuário cadastrado com sucesso!
+      </div>
+    </div>
+
+  </form>
+
+</div>
+

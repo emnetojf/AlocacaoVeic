@@ -60,9 +60,8 @@ export class CadUsrComp implements OnInit {
   }
 
 
-
   public cancelarUsuario() {
-
+    this.router.navigate(['/pesq-usr'])
   }
 
 }
