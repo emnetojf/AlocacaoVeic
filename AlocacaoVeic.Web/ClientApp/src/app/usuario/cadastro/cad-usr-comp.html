@@ -1,5 +1,5 @@
 
-<div class="login-form">
+<div class="login-form" *ngIf="!usrDelete">
   <form>
 
     <h1 class="h4" titulo>Cadastro do Usuário</h1>
@@ -66,30 +66,59 @@
 
     <div class="form-group">
       <label for="inputAdmin">Administrador?</label>
-      <input type="checkbox" name="admin" id="inputAdmin" class="mb-2" style="margin-left:5px; height:20px; width:20px;"            
+      <input type="checkbox" name="admin" id="inputAdmin" class="mb-2" style="margin-left:5px; height:20px; width:20px;"
              [(ngModel)]="usuario.booADMIN"
              #admin="ngModel" />
     </div>
 
-    
+
 
     <div class="form-group" style="text-align: right;">
-      <button class="btn btn-success" (click)="cadastrarUsuario()" [disabled]="ativar_spinner" style="margin-right:6px">
+      <button class="btn btn-success" (click)="cadastrarUsuario()" [disabled]="ativar_spinner" style="margin-right:6px" *ngIf="!usrUpdate">
         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativar_spinner"></span>
         Cadastrar
       </button>
-      <button class="btn btn-danger" (click)="cancelarUsuario()">Cancelar</button>
-    </div>
 
-    <div class="form-group">
-      <div class="alert alert-danger col-md-4" *ngIf="msgErro">
-        {{msgErro}}
-      </div>
-      <div class="alert alert-success col-md-4" *ngIf="produtoCadastrado">
-        Usuário cadastrado com sucesso!
-      </div>
+      <button class="btn btn-success" (click)="cadastrarUsuario()" [disabled]="ativar_spinner" style="margin-right:6px" *ngIf="usrUpdate">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativar_spinner"></span>
+        Atualizar
+      </button>
+
+      <button class="btn btn-warning" (click)="cancelarUsuario()">Cancelar</button>
     </div>
 
   </form>
 
 </div>
+
+
+
+<div class="login-form" *ngIf="usrDelete">
+  <form>
+
+    <h1 class="h4" titulo>Deseja excluir o usuário?</h1>
+
+    <P> <b> Nome: </b>{{usuario.strNmUsuario}}</P>
+    <p> <b> E-mail: </b> {{usuario.strEmail}}</p>
+
+
+
+
+    <div class="form-group" style="text-align: right;">
+      <button class="btn btn-danger" (click)="deletarUsuario()" [disabled]="ativar_spinner" style="margin-right:6px">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativar_spinner"></span>
+        Delete
+      </button>
+
+      <button class="btn btn-warning" (click)="cancelarUsuario()">Cancelar</button>
+    </div>
+
+  </form>
+
+</div>
+
+
+<div class="login-form alert alert-danger col-md-4" *ngIf="msgErro">
+    {{msgErro}}
+</div>
+

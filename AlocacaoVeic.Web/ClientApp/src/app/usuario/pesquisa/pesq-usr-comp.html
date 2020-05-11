@@ -18,9 +18,9 @@
     <tr *ngFor="let u of usuarios">
       <td style="width:20%;">{{u.strNmUsuario}}</td>
       <td style="width:40%;">{{u.strEmail}}</td>
-      <td>{{u.booADMIN}}</td>
-      <td><button class="btn btn-warning btn-sm" (click)="editarProduto(u)">Editar</button></td>
-      <td><button class="btn btn-danger btn-sm" (click)="deletarProduto(u)">Excluir</button></td>
+      <td>  {{u.booADMIN ? 'sim' : 'não'}}  </td>
+      <td><button class="btn btn-warning btn-sm" (click)="editarUsuario(u)">Editar</button></td>
+      <td><button class="btn btn-danger btn-sm" (click)="deletarUsuario(u)">Excluir</button></td>
     </tr>
   </tbody>
 
@@ -28,7 +28,7 @@
 </table>
 
 
-<p *ngIf="!produtos">
+<p *ngIf="!usuarios">
   carregando usuários
 </p>
 

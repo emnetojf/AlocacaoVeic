@@ -3,7 +3,9 @@ using AlocacaoVeic.Dominio.Entidades;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
+using System.Collections.Generic;
 
 namespace AlocacaoVeic.Web.Controllers
 {
@@ -15,9 +17,14 @@ namespace AlocacaoVeic.Web.Controllers
         private IHttpContextAccessor _httpContextAccessor;
         private IHostingEnvironment _hostingEnvironment;
 
+
+        private List<string> msgValidacao;
+
+
         public UsuarioController(IUsuarioRepos usuarioRepos)
         {
             _usuarioRepos = usuarioRepos;
+            msgValidacao = new List<string>();
         }
 
         [HttpGet]
@@ -39,6 +46,29 @@ namespace AlocacaoVeic.Web.Controllers
         {
             try
             {
+                msgValidacao.Clear();
+
+                if (string.IsNullOrEmpty(usuario.strNmUsuario))
+                    msgValidacao.Add("Informe o Nome do usuário!");
+
+                if (string.IsNullOrEmpty(usuario.strEmail))
+                {
+                    msgValidacao.Add("Informe o e-mail do usuário!");
+                }
+
+                if (string.IsNullOrEmpty(usuario.strSenha))
+                {
+                    msgValidacao.Add("Informe a senha do usuário!");                    
+                }
+
+                
+                if (msgValidacao.Any())
+                {
+                    return BadRequest(string.Join(" - ", msgValidacao));
+                }
+
+
+
                 if (usuario.idUser > 0)
                 {
                     _usuarioRepos.Update(usuario);
@@ -73,6 +103,6 @@ namespace AlocacaoVeic.Web.Controllers
                 return BadRequest(ex.ToString());
             }
         }
-
+                
     }
 }

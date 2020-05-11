@@ -12,13 +12,13 @@ import { Usuario } from "../../modelo/usuario";
 
 export class PesqUsrComp implements OnInit {
 
-  public _usuarios: Usuario[];
+  public usuarios: Usuario[];
 
 
   constructor(private usuarioserv: UsuarioServico, private router: Router) {
     this.usuarioserv.listarUsuarios().subscribe(
       usuarios => {
-        this._usuarios = usuarios;
+        this.usuarios = usuarios;
       },
       e => {
         console.log(e.error);
@@ -40,7 +40,7 @@ export class PesqUsrComp implements OnInit {
   }
 
   public deletarUsuario(usuario: Usuario) {
-    sessionStorage.setItem('usrSession', JSON.stringify(usuario))
+    sessionStorage.setItem('usrDelSession', JSON.stringify(usuario))
     this.router.navigate(['/cad-usr'])
   }
 

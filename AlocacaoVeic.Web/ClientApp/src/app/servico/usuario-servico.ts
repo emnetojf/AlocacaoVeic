@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { Observable } from "rxjs"
 import { Usuario } from "../modelo/usuario";
 
+
 @Injectable({
   providedIn: "root"
 })
@@ -25,8 +26,8 @@ export class UsuarioServico implements OnInit {
   // ******** Usuário Autenticado ********
   get getUsuario(): Usuario {
     let usuario_json = sessionStorage.getItem("usuario-autenticado");
-    this.usuario = JSON.parse(usuario_json)
-    return this.usuario
+    this.usuario = JSON.parse(usuario_json);
+    return this.usuario;
   }
 
   set setUsuario(usuario: Usuario) {
@@ -58,7 +59,7 @@ export class UsuarioServico implements OnInit {
   }
 
   public listarUsuarios(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(this.baseUrl + "api/usuario/");
+    return this.http.get<Usuario[]>(this.baseUrl + "api/usuario");
   }
 
   public verificaUsuarios(usuario: Usuario): Observable<Usuario> {  
