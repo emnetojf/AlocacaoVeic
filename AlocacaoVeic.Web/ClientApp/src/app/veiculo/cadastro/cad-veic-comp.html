@@ -1,5 +1,5 @@
 
-<div class="cad-form">
+<div class="login-form" *ngIf="!veicDelete">
   <form>
 
     <h1 class="h4" titulo>Cadastro de Veículos</h1>
@@ -44,13 +44,13 @@
 
     <div class="form-group">
       <label for="inputPreco" class="sr-only">Preço do Produto</label>
-      <input type="number" name="precoProduto" id="inputPreco" placeholder="Informe o preço do produto"
-             class="mb-2 col-md-4 form-control"
+      <input type="number" name="precoVeiculo" id="inputPreco" placeholder="Informe o preço do veículo"
+             class="mb-2 form-control"
              [ngClass]="{
               'is-invalid': preco.invalid && (preco.dirty || preco.touched),
               'is-valid': preco.valid && (preco.dirty || preco.touched)
            }"
-             [(ngModel)]="produto.douPreco"
+             [(ngModel)]="veiculo.douPreco"
              #preco="ngModel"
              money-mask
              required />
@@ -63,7 +63,7 @@
 
     <div class="form-group">
       <div class="input-group mb-2">
-        <div class="custom-file col-md-4">
+        <div class="custom-file ">
 
           <input type="file" id="inputFile" class="custom-file-input" (change)="inputChange($event.target.files)" />
           <label for="inputFile" class="custom-file-label">Escolha a foto do Veículo</label>
@@ -75,23 +75,48 @@
 
 
     <div class="form-group" style="text-align: right;">
-      <button class="btn btn-success" (click)="cadastrarUsuario()" [disabled]="ativar_spinner" style="margin-right:6px">
+      <button class="btn btn-success" (click)="cadastrarVeiculo()" [disabled]="ativar_spinner" style="margin-right:6px" *ngIf="!veicUpdate">
         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativar_spinner"></span>
         Cadastrar
       </button>
-      <button class="btn btn-danger" (click)="cancelarUsuario()">Cancelar</button>
-    </div>
 
-    <div class="form-group">
-      <div class="alert alert-danger col-md-4" *ngIf="msgErro">
-        {{msgErro}}
-      </div>
-      <div class="alert alert-success col-md-4" *ngIf="produtoCadastrado">
-        Usuário cadastrado com sucesso!
-      </div>
+      <button class="btn btn-success" (click)="cadastrarVeiculo()" [disabled]="ativar_spinner" style="margin-right:6px" *ngIf="veicUpdate">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativar_spinner"></span>
+        Atualizar
+      </button>
+
+      <button class="btn btn-warning" (click)="cancelarVeiculo()">Cancelar</button>
     </div>
 
   </form>
 
 </div>
 
+<div class="login-form" *ngIf="veicDelete">
+  <form>
+
+    <h1 class="h4" titulo>Deseja excluir o veículo?</h1>
+
+    <P> <b> Placa: </b>{{veiculo.strPlaca}}</P>
+    <p> <b> Modelo: </b> {{veiculo.strModelo}}</p>
+    <p> <b> Preço: </b> {{veiculo.douPreco}}</p>
+
+    
+
+    <div class="form-group" style="text-align: right;">
+      <button class="btn btn-danger" (click)="deletarVeiculo()" [disabled]="ativar_spinner" style="margin-right:6px">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativar_spinner"></span>
+        Delete
+      </button>
+
+      <button class="btn btn-warning" (click)="cancelarVeiculo()">Cancelar</button>
+    </div>
+
+  </form>
+
+</div>
+
+
+<div class="login-form alert alert-danger col-md-4" *ngIf="msgErro">
+  {{msgErro}}
+</div>

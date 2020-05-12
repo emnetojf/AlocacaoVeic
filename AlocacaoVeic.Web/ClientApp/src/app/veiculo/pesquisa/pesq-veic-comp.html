@@ -20,9 +20,9 @@
       <td style="width:20%;">{{v.strPlaca}}</td>
       <td style="width:40%;">{{v.strModelo}}</td>
       <td>{{v.douPreco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}}</td>
-      <td> <img style="width:40%; height:10%" src="../../../../../arquivos/{{v.strNomeArq}}" /></td>
-      <td><button class="btn btn-warning btn-sm" (click)="editarVeiculo(p)">Editar</button></td>
-      <td><button class="btn btn-danger btn-sm" (click)="deletarVeiculo(p)">Excluir</button></td>
+      <td> <img style="width:60%; height:30%" src="../../../../../arquivos/{{v.strNomeArq}}" /></td>
+      <td><button class="btn btn-warning btn-sm" (click)="editarVeiculo(v)">Editar</button></td>
+      <td><button class="btn btn-danger btn-sm" (click)="deletarVeiculo(v)">Excluir</button></td>
     </tr>
   </tbody>
 

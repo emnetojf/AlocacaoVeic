@@ -32,6 +32,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="ClientApp\src\app\servico\veiculo-servico.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="ClientApp\src\app\alocacao\alocacao\cad-aloc-comp.ts" />
     <None Remove="ClientApp\src\app\alocacao\pesquisa\pesq-aloc-comp.ts" />
     <None Remove="ClientApp\src\app\modelo\alocacao.ts" />
@@ -39,6 +43,8 @@
     <None Remove="ClientApp\src\app\modelo\veiculo.ts" />
     <None Remove="ClientApp\src\app\servico\notificacao-servico.ts" />
     <None Remove="ClientApp\src\app\servico\usuario-servico.ts" />
+    <None Remove="ClientApp\src\app\servico\veiculo-servico.cs" />
+    <None Remove="ClientApp\src\app\servico\veiculo-servico.ts" />
     <None Remove="ClientApp\src\app\veiculo\cadastro\cad-veic-comp.ts" />
     <None Remove="ClientApp\src\app\veiculo\pesquisa\pesq-veic-comp.ts" />
   </ItemGroup>
@@ -60,8 +66,13 @@
     <TypeScriptCompile Include="ClientApp\src\app\modelo\usuario.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\servico\notificacao-servico.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\servico\usuario-servico.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\servico\veiculo-servico.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\veiculo\cadastro\cad-veic-comp.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\veiculo\pesquisa\pesq-veic-comp.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\arquivos\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

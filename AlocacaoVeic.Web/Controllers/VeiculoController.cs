@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -16,9 +17,17 @@ namespace AlocacaoVeic.Web.Controllers
         private IHttpContextAccessor _httpContextAccessor;
         private IHostingEnvironment _hostingEnvironment;
 
-        public VeiculoController(IVeiculoRepos veiculoRepos)
+        private List<string> msgValidacao;
+
+        public VeiculoController(IVeiculoRepos veiculoRepos,
+                                 IHttpContextAccessor httpContextAccessor,
+                                 IHostingEnvironment hostingEnvironment)
         {
             _veiculoRepos = veiculoRepos;
+            _httpContextAccessor = httpContextAccessor;
+            _hostingEnvironment = hostingEnvironment;
+
+            msgValidacao = new List<string>();
         }
 
         [HttpGet]
@@ -40,6 +49,28 @@ namespace AlocacaoVeic.Web.Controllers
         {
             try
             {
+                msgValidacao.Clear();
+
+                if (string.IsNullOrEmpty(veiculo.strPlaca))
+                    msgValidacao.Add("Informe a placa do veículo!");
+
+                if (string.IsNullOrEmpty(veiculo.strModelo))
+                {
+                    msgValidacao.Add("Informe o modelo do veículo!");
+                }
+
+                if (veiculo.douPreco == 0 )
+                {
+                    msgValidacao.Add("Informe o valor de alocação do veículo!");
+                }
+
+
+                if (msgValidacao.Any())
+                {
+                    return BadRequest(string.Join(" - ", msgValidacao));
+                }
+
+
                 if (veiculo.idVeiculo > 0)
                 {
                     _veiculoRepos.Update(veiculo);

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router';
+import { Veiculo } from '../../modelo/veiculo';
+import { VeiculoServico } from '../../servico/veiculo-servico';
  
 
 @Component({
@@ -9,15 +11,34 @@ import { Router } from '@angular/router';
 })
 
 export class PesqVeicComp implements OnInit {
-  constructor(private router: Router) {
 
+  public veiculos: Veiculo[];
+
+  constructor(private veiculoserv: VeiculoServico, private router: Router) {
+    this.veiculoserv.listarVeiculos().subscribe(
+      veiculos => {
+        this.veiculos = veiculos;
+      },
+      e => {
+        console.log(e.error);
+      }
+    )
   }
 
   ngOnInit(): void {
-    throw new Error("Method not implemented.");
   }
 
   public adicionaVeiculo() {
+    this.router.navigate(['/cad-veic'])
+  }
+
+  public editarVeiculo(veiculo: Veiculo) {
+    sessionStorage.setItem('veicSession', JSON.stringify(veiculo))
+    this.router.navigate(['/cad-veic'])
+  }
+
+  public deletarVeiculo(veiculo: Veiculo) {
+    sessionStorage.setItem('veicDelSession', JSON.stringify(veiculo))
     this.router.navigate(['/cad-veic'])
   }
 }

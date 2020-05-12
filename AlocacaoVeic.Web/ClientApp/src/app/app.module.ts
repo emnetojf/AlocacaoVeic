@@ -16,6 +16,7 @@ import { CadVeicComp } from './veiculo/cadastro/cad-veic-comp';
 import { CadAlocComp } from './alocacao/alocacao/cad-aloc-comp';
 import { PesqAlocComp } from './alocacao/pesquisa/pesq-aloc-comp';
 import { UsuarioServico } from './servico/usuario-servico';
+import { VeiculoServico } from './servico/veiculo-servico';
 
 
 @NgModule({
@@ -47,7 +48,7 @@ import { UsuarioServico } from './servico/usuario-servico';
       { path: 'cad-aloc', component: CadAlocComp}, 
     ])
   ],
-  providers: [UsuarioServico],
+  providers: [UsuarioServico, VeiculoServico],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
