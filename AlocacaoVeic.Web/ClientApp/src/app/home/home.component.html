@@ -1,7 +1,7 @@
 <br />
 <br />
 
-<div class="row" [ngClass]='{"show": isExpanded}' *ngIf="false">
+<div class="row" [ngClass]='{"show": isExpanded}' *ngIf="!usuarioLogado()">
   
     <img src="../../../assets/img/rent-cars.jpg" width="300" height="300" class="rounded mx-auto d-block" />
   
@@ -9,9 +9,10 @@
 
 
 
-<div class="row" [ngClass]='{"show": isExpanded}' style="text-align:center" *ngIf="true">
-  <div class="col-lg-4">
-    <div class="card border-0" style="border-0; width: 18rem;" [routerLinkActive]='["link-active"]'>
+<div class="row justify-content-center align-items-center" [ngClass]='{"show": isExpanded}' *ngIf="usuarioLogado()">
+
+  <div class="col-lg-4" *ngIf="usuarioAdmin()">
+    <div class="card border-0" style="border-0; width: 18rem;" [routerLinkActive]='["link-active"]' >
       <div class="card-body" style="text-align:center">
         <a [routerLink]='["/pesq-usr"]' class="card-img-top" style="text-decoration: none;">
           <img src="../../../assets/img/User-icon.png" width="200" height="200" />
@@ -21,8 +22,8 @@
     </div>
   </div>
 
-  <div class="col-lg-4">
-    <div class="card border-0" style="border-0; width: 18rem;" [routerLinkActive]='["link-active"]'>
+  <div class="col-lg-4" *ngIf="usuarioAdmin()">
+    <div class="card border-0" style="border-0; width: 18rem;" [routerLinkActive]='["link-active"]' >
       <div class="card-body" style="text-align:center">
         <a [routerLink]='["/pesq-veic"]' class="card-img-top" style="text-decoration:none; ">
           <img src="../../../assets/img/icons-car.png" width="200" height="200" />

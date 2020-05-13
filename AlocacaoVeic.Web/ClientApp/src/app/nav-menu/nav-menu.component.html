@@ -9,7 +9,8 @@
     </div>
 
     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
-         [ngClass]="{ show: isExpanded }">
+         [ngClass]="{ show: isExpanded }"
+         *ngIf="!usuarioLogado()">
       <a class="navbar-brand" [routerLink]='["/login-usr"]'> <img src="../../../assets/img/login.png" width="50" height="50"> <h4>Entrar</h4> </a>
       <button class="navbar-toggler"
               type="button"
@@ -20,7 +21,21 @@
               (click)="toggle()">
         <span class="navbar-toggler-icon"></span>
       </button>
+    </div>
 
+    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
+         [ngClass]="{ show: isExpanded }"
+         *ngIf="usuarioLogado()">
+      <a class="navbar-brand" [routerLink]='["/sair"]' (click)="sair()"> <img src="../../../assets/img/login-sair.jpg" width="50" height="50"> <h6>{{nomeUsuario}}</h6> </a>
+      <button class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target=".navbar-collapse"
+              aria-label="Toggle navigation"
+              [attr.aria-expanded]="isExpanded"
+              (click)="toggle()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
     </div>
   </nav>
 </header>

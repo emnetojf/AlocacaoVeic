@@ -24,16 +24,31 @@ export class UsuarioServico implements OnInit {
   }
 
   // ******** Usuário Autenticado ********
-  get getUsuario(): Usuario {
+  get Usuario(): Usuario {
     let usuario_json = sessionStorage.getItem("usuario-autenticado");
     this.usuario = JSON.parse(usuario_json);
     return this.usuario;
   }
 
-  set setUsuario(usuario: Usuario) {
+  set Usuario(usuario: Usuario) {
     sessionStorage.setItem("usuario-autenticado", JSON.stringify(usuario));
     this.usuario = usuario;
   }
+
+  public usuarioAutenticado(): boolean {
+    return this.usuario != null && this.usuario.strEmail != "" && this.usuario.strSenha != "";
+  }
+
+  public usuarioAdmin(): boolean {
+    return this.usuarioAutenticado() && this.usuario.booADMIN; 
+  }
+
+
+  public limparSessao() {
+    sessionStorage.setItem("usuario-autenticado", "");
+    this.usuario = null;
+  }
+
   // ************************************
 
 

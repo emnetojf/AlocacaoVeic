@@ -58,10 +58,10 @@ namespace AlocacaoVeic.Web.Controllers
 
                 if (string.IsNullOrEmpty(usuario.strSenha))
                 {
-                    msgValidacao.Add("Informe a senha do usuário!");                    
+                    msgValidacao.Add("Informe a senha do usuário!");
                 }
 
-                
+
                 if (msgValidacao.Any())
                 {
                     return BadRequest(string.Join(" - ", msgValidacao));
@@ -103,6 +103,47 @@ namespace AlocacaoVeic.Web.Controllers
                 return BadRequest(ex.ToString());
             }
         }
-                
+
+        [HttpPost("VerificarUsuario")]
+        public IActionResult VerificarUsuario([FromBody] Usuario usuario)
+        {
+            try
+            {
+                msgValidacao.Clear();
+
+                if (string.IsNullOrEmpty(usuario.strEmail))
+                {
+                    msgValidacao.Add("Informe o e-mail do usuário!");
+                }
+
+                if (string.IsNullOrEmpty(usuario.strSenha))
+                {
+                    msgValidacao.Add("Informe a senha do usuário!");
+                }
+
+
+                if (msgValidacao.Any())
+                {
+                    return BadRequest(string.Join(" - ", msgValidacao));
+                }
+
+
+
+                var usuarioRetorno = this._usuarioRepos.ListUser(usuario.strEmail, usuario.strSenha);
+
+                if (usuarioRetorno != null)
+                {
+                    return Ok(usuarioRetorno);
+                }
+
+                return BadRequest("Usuário ou senha inválidos");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.ToString());
+            }
+        }
+
+
     }
 }
