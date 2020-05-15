@@ -17,6 +17,7 @@ import { CadAlocComp } from './alocacao/alocacao/cad-aloc-comp';
 import { PesqAlocComp } from './alocacao/pesquisa/pesq-aloc-comp';
 import { UsuarioServico } from './servico/usuario-servico';
 import { VeiculoServico } from './servico/veiculo-servico';
+import { PesqVeicAlocComp } from './alocacao/pesquisa-veiculos/pesq-veic-aloc-comp';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { VeiculoServico } from './servico/veiculo-servico';
     CadVeicComp,
     PesqAlocComp,
     CadAlocComp,
+    PesqVeicAlocComp,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -45,7 +47,8 @@ import { VeiculoServico } from './servico/veiculo-servico';
       { path: 'pesq-veic', component: PesqVeicComp },
       { path: 'cad-veic', component: CadVeicComp },
       { path: 'pesq-aloc', component: PesqAlocComp },
-      { path: 'cad-aloc', component: CadAlocComp}, 
+      { path: 'cad-aloc', component: CadAlocComp },
+      { path: 'pesq-veic-aloc', component: PesqVeicAlocComp }, 
     ])
   ],
   providers: [UsuarioServico, VeiculoServico],

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
+import { Veiculo } from '../../modelo/veiculo';
 
 @Component({
   selector: "pesq-aloc",
@@ -8,8 +9,11 @@ import { Router } from '@angular/router'
 })
 
 export class PesqAlocComp implements OnInit {
-  constructor(private router: Router) {
 
+  public veiculos: Veiculo[];
+
+  constructor(private router: Router) {
+    
   }
 
   ngOnInit(): void {
@@ -17,7 +21,7 @@ export class PesqAlocComp implements OnInit {
   }
 
   public adicionaAlocacao() {
-    this.router.navigate(["/cad-aloc"])
+    this.router.navigate(["/pesq-veic-aloc"])
   }
 
 }

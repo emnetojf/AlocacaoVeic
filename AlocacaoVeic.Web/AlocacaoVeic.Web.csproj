@@ -37,6 +37,7 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\alocacao\alocacao\cad-aloc-comp.ts" />
+    <None Remove="ClientApp\src\app\alocacao\pesquisa-veiculos\pesq-veic-aloc-comp.ts" />
     <None Remove="ClientApp\src\app\alocacao\pesquisa\pesq-aloc-comp.ts" />
     <None Remove="ClientApp\src\app\modelo\alocacao.ts" />
     <None Remove="ClientApp\src\app\modelo\usuario.ts" />
@@ -56,6 +57,7 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\alocacao\alocacao\cad-aloc-comp.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\alocacao\pesquisa-veiculos\pesq-veic-aloc-comp.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\alocacao\pesquisa\pesq-aloc-comp.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelo\alocacao.ts">
       <SubType>Code</SubType>

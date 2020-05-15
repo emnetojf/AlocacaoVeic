@@ -1,3 +1,42 @@
-<h1>Pesquisa Alocação</h1>
+<h1 class="h4 mb-4" titulo>Pesquisa Veículo</h1>
 
-<button (click)="adicionaAlocacao()">Alocação</button>
+<button class="btn btn-primary mb-4" (click)="adicionaAlocacao()">Veículos Alocação</button>
+
+
+<table class="table table-hover" >
+  <thead>
+    <tr>
+      <th>Placa</th>
+      <th>Modelo</th>
+      <th>Data Início</th>
+      <th>Data Fim</th>
+      <th>Preço</th>
+      <th>Total</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let v of veiculos">
+      <td style="width:20%;"></td>
+      <td style="width:40%;"></td>
+      <td style="width:40%;"></td>
+      <td style="width:40%;"></td>
+      <td></td>
+      <td></td>
+      <td><button class="btn btn-warning btn-sm" (click)="editarVeiculo(v)">Editar</button></td>
+      <td><button class="btn btn-danger btn-sm" (click)="deletarVeiculo(v)">Excluir</button></td>
+    </tr>
+  </tbody>
+
+
+</table>
+
+
+<p>
+  carregando veículos
+</p>
+
+
+
