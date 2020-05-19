@@ -4,14 +4,16 @@ using AlocacaoVeic.Repositorio.Contexto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AlocacaoVeic.Repositorio.Migrations
 {
     [DbContext(typeof(AlocacaoContext))]
-    partial class AlocacaoContextModelSnapshot : ModelSnapshot
+    [Migration("20200515212028_Alocacao UsuarioId - VeiculoId")]
+    partial class AlocacaoUsuarioIdVeiculoId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

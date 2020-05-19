@@ -21,6 +21,8 @@ namespace AlocacaoVeic.Dominio.Entidades
         public double douPreco { get; set; }
 
         public string strNomeArq { get; set; }
-       
+
+        public bool booALOCADO { get; set; }
+
     }
 }

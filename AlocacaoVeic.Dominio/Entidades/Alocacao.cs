@@ -9,10 +9,10 @@ namespace AlocacaoVeic.Dominio.Entidades
     {
         public int idAlocacao { get; set; }
 
-        public int UsuarioID { get; set; }
+        public int UsuarioId { get; set; }
         public virtual Usuario Usuario { get; set; }
 
-        public int VeiculoID { get; set; }
+        public int VeiculoId { get; set; }
         public virtual Veiculo Veiculo { get; set; }
 
         [Required(ErrorMessage = "Informe a data ínicio da alocação do veículo!")]
@@ -25,8 +25,10 @@ namespace AlocacaoVeic.Dominio.Entidades
         [DataType(DataType.Date)]
         public DateTime dtFim { get; set; }
 
-        public int PagtoID { get; set; }
+        public int PagtoId { get; set; }
         public virtual FormaPagto FormaPagto { get; set; }
-                
+
+       
+
     }
 }

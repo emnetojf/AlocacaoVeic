@@ -4,16 +4,25 @@
   <div class="row">
     <div class="col-md-4 mb-4" *ngFor="let v of veiculos">
 
-      <a (click)="adicionaAlocacao(v)" style="cursor:pointer;">
-        <div class="card">
+        <a (click)="adicionaAlocacao(v)" style="cursor:pointer;" *ngIf="!veicAlocado(v)" >
+          <div class="card">
+            <img class="card-img-top" src="../../../../../arquivos/{{v.strNomeArq}}" style="width:100%; height:200px;" />
+            <div class="card-body">
+              <h5 class="card-title">{{v.strPlaca}}</h5>
+              <p class="card-text">{{v.strModelo}}</p> <!--| truncate: 40-->
+              <h3>{{v.douPreco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}}</h3>
+            </div>
+          </div>
+        </a>
+
+        <div class="card" *ngIf="veicAlocado(v)" >
           <img class="card-img-top" src="../../../../../arquivos/{{v.strNomeArq}}" style="width:100%; height:200px;" />
           <div class="card-body">
             <h5 class="card-title">{{v.strPlaca}}</h5>
-            <p class="card-text">{{v.strModelo}}</p> <!--| truncate: 40-->
-            <h5 class="h5">{{v.douPreco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}}</h5>
+            <p class="card-text"> {{v.strModelo}} </p>
+            <h3 class="text-danger">Alocado</h3>
           </div>
         </div>
-      </a>
 
     </div>
   </div>

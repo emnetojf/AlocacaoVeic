@@ -1,30 +1,47 @@
 <div class="login-form">
-    <form>
+  <form>
 
-        <div class="row">
-            <div class="col-md-6">
-                <img src="../../../../../arquivos/{{veiculo.strNomeArq}}" style="width:100%; height:100%;" />
-            </div>
-            <div class="col-md-6">
-              <div class="row mb-4"> <h1 class="h4">{{veiculo.strPlaca}} - {{veiculo.strModelo}}</h1> </div>
-              <div class="row mb-4">
-                <strong>Data Início: {{hoje | date:'dd-MM-yyyy'}}</strong>
-                <strong>Data Fim: <input type="date" id="dtfim" ng-model="alocacao.dtFim" (change)="calcularTotal()"> </strong>
-              </div>              
-              <div class="row mb-4"> <h1 class="h2">{{Total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}}</h1> </div>
-              <div class="row mb-4">
-                <button class="btn btn-danger" (click)="alocar()" [disabled]="ativar_spinner" style="width:90px; margin-right:6px">
-                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativar_spinner"></span>
-                  Alocar
-                </button>
+    <div class="row">
+      <div class="col-md-6">
+        <img src="../../../../../arquivos/{{veiculo.strNomeArq}}" style="width:100%; height:90%;" />
+      </div>
+      <div class="col-md-6">
+        <div class="row mb-2"> <h1 class="h4">{{veiculo.strPlaca}} - {{veiculo.strModelo}}</h1> </div>
+        <div class="row mb-2">
+          <strong>Data Início: {{hoje | date:'dd-MM-yyyy'}}</strong>
+          <strong>
+            Data Fim:
+            <input type="date" name="dtfim" id="dtfim" (change)="calcularTotal()"
+                   [ngClass]="{
+                           'is-invalid': dtfim.invalid && (dtfim.dirty || dtfim.touched),
+                           'is-valid': dtfim.valid && (dtfim.dirty || dtfim.touched)
+                    }"
+                   [(ngModel)]="alocacao.dtFim"
+                   #dtfim="ngModel"
+                   dtfim
+                   required>
+          </strong>
+        </div>
+        <div class="row mb-2"> <h1 class="h2">{{Total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}}</h1> </div>
+        <div class="row mb-2">
+          <button class="btn btn-danger" (click)="realizaAlocacao()" [disabled]="ativar_spinner" style="width:90px; margin-right:6px">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativar_spinner"></span>
+            Alocar
+          </button>
 
-                <button class="btn btn-warning" (click)="cancelarVeiculo()">Cancelar</button>
-
-              </div>
-            </div>
+          <button class="btn btn-warning" (click)="cancelarVeiculo()">Cancelar</button>
         </div>
 
-    </form>
+        <div class="invalid-feedback row mb-2" *ngIf="dtfim.invalid && (dtfim.dirty || dtfim.touched)" role="alert">
+          <div *ngIf="dtfim.errors.required">
+            Data final de alocação deve ser preenchido!
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </form>
 
 </div>
 

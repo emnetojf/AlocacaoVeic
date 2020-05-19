@@ -13,8 +13,8 @@ namespace AlocacaoVeic.Repositorio.config
         {
             builder.HasKey(aloc => aloc.idAlocacao);
 
-            builder.Property(aloc => aloc.UsuarioID).IsRequired();
-            builder.Property(aloc => aloc.VeiculoID).IsRequired();
+            builder.Property(aloc => aloc.UsuarioId).IsRequired();
+            builder.Property(aloc => aloc.VeiculoId).IsRequired();
             builder.Property(aloc => aloc.dtInicio).IsRequired();
             builder.Property(aloc => aloc.dtFim).IsRequired();
         }

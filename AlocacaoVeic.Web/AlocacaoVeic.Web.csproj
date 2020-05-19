@@ -42,6 +42,7 @@
     <None Remove="ClientApp\src\app\modelo\alocacao.ts" />
     <None Remove="ClientApp\src\app\modelo\usuario.ts" />
     <None Remove="ClientApp\src\app\modelo\veiculo.ts" />
+    <None Remove="ClientApp\src\app\servico\alocacao-servico.ts" />
     <None Remove="ClientApp\src\app\servico\notificacao-servico.ts" />
     <None Remove="ClientApp\src\app\servico\usuario-servico.ts" />
     <None Remove="ClientApp\src\app\servico\veiculo-servico.cs" />
@@ -66,6 +67,7 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\modelo\usuario.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\servico\alocacao-servico.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\servico\notificacao-servico.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\servico\usuario-servico.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\servico\veiculo-servico.ts" />

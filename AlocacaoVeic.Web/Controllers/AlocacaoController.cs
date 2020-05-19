@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AlocacaoVeic.Web.Controllers
 {
@@ -15,9 +17,19 @@ namespace AlocacaoVeic.Web.Controllers
         private IHttpContextAccessor _httpContextAccessor;
         private IHostingEnvironment _hostingEnvironment;
 
-        public AlocacaoController(IAlocacaoRepos alocacaoRepos)
+        private Alocacao alocacao;
+        private List<string> msgValidacao;
+
+        public AlocacaoController(IAlocacaoRepos alocacaoRepos,
+                                  IHttpContextAccessor httpContextAccessor,
+                                  IHostingEnvironment hostingEnvironment)
         {
             _alocacaoRepos = alocacaoRepos;
+            _httpContextAccessor = httpContextAccessor;
+            _hostingEnvironment = hostingEnvironment;
+            msgValidacao = new List<string>();
+
+            alocacao = new Alocacao();
         }
 
         [HttpGet]
@@ -25,6 +37,8 @@ namespace AlocacaoVeic.Web.Controllers
         {
             try
             {
+                //alocacao.Veiculo.strModelo
+
                 return Json(_alocacaoRepos.ListAll());
             }
             catch (Exception ex)
@@ -39,6 +53,19 @@ namespace AlocacaoVeic.Web.Controllers
         {
             try
             {
+                msgValidacao.Clear();
+
+                if (alocacao.dtFim == null)
+                    msgValidacao.Add("Informe a data final de alocação!");
+
+                
+                if (msgValidacao.Any())
+                {
+                    return BadRequest(msgValidacao);
+                }
+
+
+
                 if (alocacao.idAlocacao > 0)
                 {
                     _alocacaoRepos.Update(alocacao);

@@ -15,9 +15,10 @@ import { PesqVeicComp } from './veiculo/pesquisa/pesq-veic-comp';
 import { CadVeicComp } from './veiculo/cadastro/cad-veic-comp';
 import { CadAlocComp } from './alocacao/alocacao/cad-aloc-comp';
 import { PesqAlocComp } from './alocacao/pesquisa/pesq-aloc-comp';
+import { PesqVeicAlocComp } from './alocacao/pesquisa-veiculos/pesq-veic-aloc-comp';
 import { UsuarioServico } from './servico/usuario-servico';
 import { VeiculoServico } from './servico/veiculo-servico';
-import { PesqVeicAlocComp } from './alocacao/pesquisa-veiculos/pesq-veic-aloc-comp';
+import { AlocacaoServico } from './servico/alocacao-servico';
 
 
 @NgModule({
@@ -51,7 +52,7 @@ import { PesqVeicAlocComp } from './alocacao/pesquisa-veiculos/pesq-veic-aloc-co
       { path: 'pesq-veic-aloc', component: PesqVeicAlocComp }, 
     ])
   ],
-  providers: [UsuarioServico, VeiculoServico],
+  providers: [UsuarioServico, VeiculoServico, AlocacaoServico],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,8 @@
 export class Alocacao {
   idAlocacao: number;
-  UsuarioID: number;
-  VeiculoID: number;
+  UsuarioId: number;
+  VeiculoId: number;
   dtInicio: Date;
   dtFim: Date;
-  PagtoID: number
+  PagtoID: number;  
 }

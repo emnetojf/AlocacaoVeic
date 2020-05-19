@@ -32,4 +32,8 @@ export class PesqVeicAlocComp implements OnInit {
     this.router.navigate(["/cad-aloc"])
   }
 
+  public veicAlocado(veiculo: Veiculo): boolean {
+    return veiculo.booALOCADO
+  }
+
 }

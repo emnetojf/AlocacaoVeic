@@ -2,7 +2,7 @@ import { Injectable, Inject, OnInit } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { Veiculo } from '../modelo/veiculo';
-import { inject } from '@angular/core/testing';
+
 
 @Injectable({
   providedIn: "root"
@@ -11,14 +11,13 @@ import { inject } from '@angular/core/testing';
 export class VeiculoServico implements OnInit {
 
   private baseUrl: string;
-  private veiculo: Veiculo;
-
+  
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.baseUrl = baseUrl;
   }
   
   ngOnInit(): void {
-    this.veiculo = new Veiculo();     
+    
   }
 
   get headers(): HttpHeaders {

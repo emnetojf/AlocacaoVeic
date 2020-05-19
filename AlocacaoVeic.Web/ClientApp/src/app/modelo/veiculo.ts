@@ -4,4 +4,5 @@ export class Veiculo {
   strModelo: string;
   douPreco: number;
   strNomeArq: string;
+  booALOCADO: boolean; 
 }

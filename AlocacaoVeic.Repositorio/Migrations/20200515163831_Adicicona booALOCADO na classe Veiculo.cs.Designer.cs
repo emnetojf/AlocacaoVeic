@@ -4,14 +4,16 @@ using AlocacaoVeic.Repositorio.Contexto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AlocacaoVeic.Repositorio.Migrations
 {
     [DbContext(typeof(AlocacaoContext))]
-    partial class AlocacaoContextModelSnapshot : ModelSnapshot
+    [Migration("20200515163831_Adicicona booALOCADO na classe Veiculo.cs")]
+    partial class AdiciconabooALOCADOnaclasseVeiculocs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,11 +29,11 @@ namespace AlocacaoVeic.Repositorio.Migrations
 
                     b.Property<int>("FormaPagto");
 
-                    b.Property<int>("PagtoId");
+                    b.Property<int>("PagtoID");
 
-                    b.Property<int>("UsuarioId");
+                    b.Property<int>("UsuarioID");
 
-                    b.Property<int>("VeiculoId");
+                    b.Property<int>("VeiculoID");
 
                     b.Property<DateTime>("dtFim");
 
@@ -39,9 +41,9 @@ namespace AlocacaoVeic.Repositorio.Migrations
 
                     b.HasKey("idAlocacao");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("UsuarioID");
 
-                    b.HasIndex("VeiculoId");
+                    b.HasIndex("VeiculoID");
 
                     b.ToTable("Alocacoes");
                 });
@@ -122,12 +124,12 @@ namespace AlocacaoVeic.Repositorio.Migrations
                 {
                     b.HasOne("AlocacaoVeic.Dominio.Entidades.Usuario", "Usuario")
                         .WithMany("Alocacoes")
-                        .HasForeignKey("UsuarioId")
+                        .HasForeignKey("UsuarioID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("AlocacaoVeic.Dominio.Entidades.Veiculo", "Veiculo")
                         .WithMany()
-                        .HasForeignKey("VeiculoId")
+                        .HasForeignKey("VeiculoID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

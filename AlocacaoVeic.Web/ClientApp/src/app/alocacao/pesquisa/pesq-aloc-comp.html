@@ -1,9 +1,9 @@
-<h1 class="h4 mb-4" titulo>Pesquisa Veículo</h1>
+<h1 class="h4 mb-4" titulo>Pesquisa Alocações</h1>
 
 <button class="btn btn-primary mb-4" (click)="adicionaAlocacao()">Veículos Alocação</button>
 
 
-<table class="table table-hover" >
+<table class="table table-hover" *ngIf="alocacoes" >
   <thead>
     <tr>
       <th>Placa</th>
@@ -18,15 +18,15 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let v of veiculos">
-      <td style="width:20%;"></td>
-      <td style="width:40%;"></td>
-      <td style="width:40%;"></td>
-      <td style="width:40%;"></td>
+    <tr *ngFor="let a of alocacoes">
+      <td style="width:20%;">{{a.UsuarioId}}</td>
+      <td style="width:20%;">{{a.VeiculoId}}</td>
+      <td style="width:20%;">{{a.dtInicio}}</td>
+      <td style="width:20%;">{{a.dtFim}}</td>
       <td></td>
       <td></td>
-      <td><button class="btn btn-warning btn-sm" (click)="editarVeiculo(v)">Editar</button></td>
-      <td><button class="btn btn-danger btn-sm" (click)="deletarVeiculo(v)">Excluir</button></td>
+      <td><button class="btn btn-warning btn-sm" (click)="editarAlocacao(a)" >Editar</button></td>
+      <td><button class="btn btn-danger btn-sm" >Excluir</button></td>
     </tr>
   </tbody>
 
@@ -34,8 +34,8 @@
 </table>
 
 
-<p>
-  carregando veículos
+<p *ngIf="!alocacoes">
+  carregando alocações
 </p>
 
 

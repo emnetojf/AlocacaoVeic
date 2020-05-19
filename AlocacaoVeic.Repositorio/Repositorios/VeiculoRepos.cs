@@ -7,7 +7,7 @@ namespace AlocacaoVeic.Repositorio.Repositorios
     public class VeiculoRepos : BaseRepositorio<Veiculo>, IVeiculoRepos
     {
         public VeiculoRepos(AlocacaoContext alocacaoContext) : base(alocacaoContext)
-    {
+        {
+        }
     }
-}
 }
