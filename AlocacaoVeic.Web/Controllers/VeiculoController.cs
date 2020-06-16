@@ -44,6 +44,22 @@ namespace AlocacaoVeic.Web.Controllers
             }
         }
 
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            try
+            {
+               return Json(_veiculoRepos.ListById(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
+
+
+
         [HttpPost]
         public IActionResult Post([FromBody] Veiculo veiculo)
         {

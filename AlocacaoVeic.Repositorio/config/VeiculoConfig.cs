@@ -15,7 +15,9 @@ namespace AlocacaoVeic.Repositorio.config
 
             builder.Property(veic => veic.strModelo).IsRequired().HasMaxLength(400);
             builder.Property(veic => veic.strPlaca).IsRequired().HasMaxLength(50);
-            builder.Property(veic => veic.douPreco).IsRequired().HasColumnType("float");           
+            builder.Property(veic => veic.douPreco).IsRequired().HasColumnType("float");
+
+            builder.HasMany(veic => veic.Alocacoes).WithOne(aloc => aloc.Veiculo);
         }
     }
 }

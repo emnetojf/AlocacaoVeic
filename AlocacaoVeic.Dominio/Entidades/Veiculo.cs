@@ -24,5 +24,6 @@ namespace AlocacaoVeic.Dominio.Entidades
 
         public bool booALOCADO { get; set; }
 
+        public virtual ICollection<Alocacao> Alocacoes { get; set; } 
     }
 }

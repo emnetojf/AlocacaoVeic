@@ -14,8 +14,8 @@ namespace AlocacaoVeic.Web.Controllers
     {
 
         private readonly IUsuarioRepos _usuarioRepos;
-        private IHttpContextAccessor _httpContextAccessor;
-        private IHostingEnvironment _hostingEnvironment;
+        //private IHttpContextAccessor _httpContextAccessor;
+        //private IHostingEnvironment _hostingEnvironment;
 
 
         private List<string> msgValidacao;

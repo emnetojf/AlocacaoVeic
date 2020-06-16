@@ -1,48 +1,44 @@
-<div class="login-form">
-  <form>
 
-    <div class="row">
-      <div class="col-md-6">
-        <img src="../../../../../arquivos/{{veiculo.strNomeArq}}" style="width:100%; height:90%;" />
-      </div>
-      <div class="col-md-6">
-        <div class="row mb-2"> <h1 class="h4">{{veiculo.strPlaca}} - {{veiculo.strModelo}}</h1> </div>
-        <div class="row mb-2">
-          <strong>Data Início: {{hoje | date:'dd-MM-yyyy'}}</strong>
-          <strong>
-            Data Fim:
-            <input type="date" name="dtfim" id="dtfim" (change)="calcularTotal()"
-                   [ngClass]="{
-                           'is-invalid': dtfim.invalid && (dtfim.dirty || dtfim.touched),
-                           'is-valid': dtfim.valid && (dtfim.dirty || dtfim.touched)
-                    }"
-                   [(ngModel)]="alocacao.dtFim"
-                   #dtfim="ngModel"
-                   dtfim
-                   required>
-          </strong>
+  <div class="login-form">
+    <form>
+
+      <h1 class="h4" titulo>Alocação de Veículos</h1>
+      <div class="row">
+        <div class="col-md-6">
+          <img src="../../../../../arquivos/{{veiculo.strNomeArq}}" style="width:100%; height:90%;" />
         </div>
-        <div class="row mb-2"> <h1 class="h2">{{Total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}}</h1> </div>
-        <div class="row mb-2">
-          <button class="btn btn-danger" (click)="realizaAlocacao()" [disabled]="ativar_spinner" style="width:90px; margin-right:6px">
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativar_spinner"></span>
-            Alocar
-          </button>
-
-          <button class="btn btn-warning" (click)="cancelarVeiculo()">Cancelar</button>
-        </div>
-
-        <div class="invalid-feedback row mb-2" *ngIf="dtfim.invalid && (dtfim.dirty || dtfim.touched)" role="alert">
-          <div *ngIf="dtfim.errors.required">
-            Data final de alocação deve ser preenchido!
+        <div class="col-md-6">
+          <div class="row mb-2"> <h1 class="h4">{{veiculo.strPlaca}} - {{veiculo.strModelo}}</h1> </div>
+          <div class="row mb-2">
+            <strong>Data Início: {{hoje | date:'dd-MM-yyyy'}}</strong>
+            <strong>
+              Data Fim:
+              <input type="date" name="dtfim" id="dtfim" (change)="calcularTotal()" />
+            </strong>
           </div>
+          <div class="row mb-2"> <h1 class="h2">{{Total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}}</h1> </div>
+          <div class="row mb-2">
+            <button class="btn btn-success" (click)="realizaAlocacao()" [disabled]="ativar_spinner" style="width:90px; margin-right:6px">
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativar_spinner"></span>
+              Alocar
+            </button>
+
+            <button class="btn btn-warning" (click)="cancelarVeiculo()">Cancelar</button>
+          </div>
+
         </div>
-
       </div>
-    </div>
 
-  </form>
+    </form>
 
+  </div>
+
+
+
+<div class="invalid-feedback row mb-2" *ngIf="dtfim.invalid && (dtfim.dirty || dtfim.touched)" role="alert">
+  <div *ngIf="dtfim.errors.required">
+    Data final de alocação deve ser preenchido!
+  </div>
 </div>
 
 
@@ -50,32 +46,3 @@
 
 
 
-
-
-<!--<div class="login-form">
-    <form>
-
-        <h1 class="h4" titulo>Deseja excluir o veículo?</h1>
-
-        <div class="col-md-6">
-            <P> <b> Placa: </b>{{veiculo.strPlaca}}</P>
-            <p> <b> Modelo: </b> {{veiculo.strModelo}}</p>
-            <p> <b> Preço: </b> {{veiculo.douPreco}}</p>
-        </div>
-
-        <div class="col-md-6">
-            <img src="../../../../../arquivos/{{veiculo.strNomeArq}}" style="width:200px; height:200px;" />
-        </div>
-
-        <div class="col-md-6" style="text-align: right;">
-            <button class="btn btn-danger" (click)="deletarVeiculo()" [disabled]="ativar_spinner" style="margin-right:6px">
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativar_spinner"></span>
-                Delete
-            </button>
-
-            <button class="btn btn-warning" (click)="cancelarVeiculo()">Cancelar</button>
-        </div>
-
-    </form>
-
-</div>-->

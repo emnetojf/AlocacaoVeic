@@ -5,40 +5,42 @@ import { AlocacaoServico } from '../../servico/alocacao-servico';
 import { Veiculo } from '../../modelo/veiculo';
 import { VeiculoServico } from '../../servico/veiculo-servico';
 
+
 @Component({
   selector: "pesq-aloc",
-  templateUrl: "./pesq-aloc-comp.html",
+  templateUrl: "./pesq-aloc-comp.html",     
   styleUrls: ["./pesq-aloc-comp.css"]
 })
+
+
 
 export class PesqAlocComp implements OnInit {
 
   public alocacoes: Alocacao[];
-  public veiculos: Veiculo[];
-
+  public veiculo: Veiculo;
 
   constructor(private alocacaoserv: AlocacaoServico, private veiculoserv: VeiculoServico, private router: Router) {
 
-    
     this.alocacaoserv.listaAlocacoes().subscribe(
       alocacoes => {
         this.alocacoes = alocacoes;
-
-        //this.veiculoserv.listarVeiculos().subscribe(
-        //  veiculos => {
-        //    this.veiculos = veiculos;
-        //  },
-        //  e => {
-        //    console.log(e.error);
-        //  }
-        //)
-
-
+        
       },
       e => {
         console.log(e.error);
       }
-    )    
+    )
+
+    //for (let aloc of this.alocacoes) {
+
+    //  this.veiculoserv.listaVeiculo(aloc.VeiculoId).subscribe(
+    //    veic => {
+    //      this.veiculo = veic;          
+    //    }
+    //  )      
+
+    //}    
+    
   }
 
   ngOnInit(): void {
@@ -50,12 +52,12 @@ export class PesqAlocComp implements OnInit {
   }
 
   public editarAlocacao(alocacao: Alocacao) {
-    sessionStorage.setItem("veicAlocacao", JSON.stringify(alocacao))
-    this.router.navigate(["/cad-aloc"])
+    sessionStorage.setItem("editAlocacao", JSON.stringify(alocacao))
+    this.router.navigate(["/edit-aloc"])
   }
 
   public deletarAlocacao(alocacao: Alocacao) {
-    sessionStorage.setItem("veicDelAlocacao", JSON.stringify(alocacao))
+    sessionStorage.setItem("delAlocacao", JSON.stringify(alocacao))
     this.router.navigate(["/cad-aloc"])
   }
 }

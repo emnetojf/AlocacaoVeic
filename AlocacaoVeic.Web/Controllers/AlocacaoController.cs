@@ -3,6 +3,7 @@ using AlocacaoVeic.Dominio.Entidades;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace AlocacaoVeic.Web.Controllers
         {
             try
             {
-                //alocacao.Veiculo.strModelo
+                //var alocacao = _alocacaoRepos.listaAlocacoes();
 
                 return Json(_alocacaoRepos.ListAll());
             }

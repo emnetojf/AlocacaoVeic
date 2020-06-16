@@ -33,7 +33,7 @@ export class VeiculoServico implements OnInit {
   }
 
   public listaVeiculo(idVeiculo: number): Observable<Veiculo> {
-    return this.http.get<Veiculo>(this.baseUrl + 'api/veiculo/lista')
+     return this.http.get<Veiculo>(this.baseUrl + 'api/veiculo/' + idVeiculo);
   }
 
   public listarVeiculos(): Observable<Veiculo[]> {

@@ -4,14 +4,16 @@ using AlocacaoVeic.Repositorio.Contexto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AlocacaoVeic.Repositorio.Migrations
 {
     [DbContext(typeof(AlocacaoContext))]
-    partial class AlocacaoContextModelSnapshot : ModelSnapshot
+    [Migration("20200521164243_Relacionamento Veiculo-Alocacao VeicConfig.cs Veic.cs")]
+    partial class RelacionamentoVeiculoAlocacaoVeicConfigcsVeiccs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

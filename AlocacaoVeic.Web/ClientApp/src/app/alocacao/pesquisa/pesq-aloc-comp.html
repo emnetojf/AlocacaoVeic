@@ -1,42 +1,45 @@
-<h1 class="h4 mb-4" titulo>Pesquisa Alocações</h1>
 
-<button class="btn btn-primary mb-4" (click)="adicionaAlocacao()">Veículos Alocação</button>
+  <h1 class="h4 mb-4" titulo>Pesquisa Alocações</h1>
 
-
-<table class="table table-hover" *ngIf="alocacoes" >
-  <thead>
-    <tr>
-      <th>Placa</th>
-      <th>Modelo</th>
-      <th>Data Início</th>
-      <th>Data Fim</th>
-      <th>Preço</th>
-      <th>Total</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr *ngFor="let a of alocacoes">
-      <td style="width:20%;">{{a.UsuarioId}}</td>
-      <td style="width:20%;">{{a.VeiculoId}}</td>
-      <td style="width:20%;">{{a.dtInicio}}</td>
-      <td style="width:20%;">{{a.dtFim}}</td>
-      <td></td>
-      <td></td>
-      <td><button class="btn btn-warning btn-sm" (click)="editarAlocacao(a)" >Editar</button></td>
-      <td><button class="btn btn-danger btn-sm" >Excluir</button></td>
-    </tr>
-  </tbody>
+  <button class="btn btn-primary mb-4" (click)="adicionaAlocacao()">Veículos Alocação</button>
 
 
-</table>
+  <table class="table table-hover" *ngIf="alocacoes">
+    <thead>
+      <tr>
+        <th>Placa</th>
+        <th>Modelo</th>
+        <th>Data Início</th>
+        <th>Data Fim</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let a of alocacoes">
+        <td></td>
+        <td></td>
+        <td>{{a.dtInicio | date:'dd-MM-yyyy' }}</td>
+        <td>{{a.dtFim | date:'dd-MM-yyyy'}}</td>
+        <td><img style="width:60%; height:30%" src="../../../../../arquivos/" /></td>
+        <td></td>
+        <td><button class="btn btn-warning btn-sm" (click)="editarAlocacao(a)">Editar</button></td>
+        <td><button class="btn btn-danger btn-sm" (click)="deletarAlocacao(a)">Excluir</button></td>
+      </tr>
+     
+
+    </tbody>
+    
+
+  </table>
 
 
-<p *ngIf="!alocacoes">
-  carregando alocações
-</p>
+  <p *ngIf="!alocacoes">
+    carregando alocações
+  </p>
 
 
 

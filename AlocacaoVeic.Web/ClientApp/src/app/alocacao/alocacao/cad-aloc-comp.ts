@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Veiculo } from '../../modelo/veiculo';
 import { Alocacao } from '../../modelo/alocacao';
 import { Usuario } from '../../modelo/usuario';
-import { UsuarioServico } from '../../servico/usuario-servico';
 import { AlocacaoServico } from '../../servico/alocacao-servico';
 import { NotificacaoServico } from '../../servico/notificacao-servico';
 import { VeiculoServico } from '../../servico/veiculo-servico';
@@ -19,22 +18,21 @@ export class CadAlocComp implements OnInit {
   public veiculo: Veiculo;
   public usuario: Usuario;
   public alocacao: Alocacao;
-  public hoje;
-  public dtfinal;
-  public Total;
+  public hoje: Date;
+  public dtfinal: Date;
+  public Total: number;
 
   public ativar_spinner: boolean;
   public msgErro: string;
 
 
-  constructor(private usuarioserv: UsuarioServico, private alocacaoserv: AlocacaoServico,
+  constructor(private alocacaoserv: AlocacaoServico,
               private notificacao: NotificacaoServico, private veiculoserv: VeiculoServico,
               private router: Router) {
-
+    
   }
 
-  ngOnInit(): void {
-    this.usuario = this.usuarioserv.Usuario;
+  ngOnInit(): void {    
     
     var veiculoAlocacao = sessionStorage.getItem("veicAlocacao");
 
@@ -43,8 +41,14 @@ export class CadAlocComp implements OnInit {
       this.hoje = new Date();
       this.dtfinal = new Date();
       this.Total = 0;
-    }
+
+      console.log(this.veiculo);
+    } 
   }
+
+ 
+
+
 
   calcularTotal() {
 
@@ -63,13 +67,15 @@ export class CadAlocComp implements OnInit {
     }
   }
 
+
+
   public realizaAlocacao() {
     this.ativar_spinner = true;
 
     let alocacao = new Alocacao();
 
     alocacao.UsuarioId = this.usuario.idUser;
-    alocacao.VeiculoId = this.veiculo.idVeiculo;
+    alocacao.veiculoId = this.veiculo.idVeiculo;
     alocacao.dtInicio = this.hoje;
     alocacao.dtFim = this.dtfinal;
 
@@ -110,8 +116,8 @@ export class CadAlocComp implements OnInit {
 
 
   public cancelarVeiculo() {
-    sessionStorage.setItem("veicAlocacao", "");
-    this.router.navigate(['/pesq-veic-aloc']);
+    sessionStorage.setItem("veicAlocacao", "");   
+    this.router.navigate(['/pesq-veic-aloc']);    
   }
 
 }
