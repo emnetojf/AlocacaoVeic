@@ -21,6 +21,9 @@ namespace AlocacaoVeic.Web.Controllers
         private Alocacao alocacao;
         private List<string> msgValidacao;
 
+        private DateTime dtInicio;
+        private DateTime dtFinal;
+
         public AlocacaoController(IAlocacaoRepos alocacaoRepos,
                                   IHttpContextAccessor httpContextAccessor,
                                   IHostingEnvironment hostingEnvironment)
@@ -56,13 +59,20 @@ namespace AlocacaoVeic.Web.Controllers
             {
                 msgValidacao.Clear();
 
-                if (alocacao.dtFim == null)
+                dtInicio = alocacao.dtInicio.Date;
+                dtFinal = alocacao.dtFim.Date; 
+                
+
+                if  (dtFinal == null)
                     msgValidacao.Add("Informe a data final de alocação!");
 
-                
+                if (dtFinal < dtInicio)
+                    msgValidacao.Add("A data final de alocação não pode ser menor que a data inicial de alocação!");
+
+
                 if (msgValidacao.Any())
                 {
-                    return BadRequest(msgValidacao);
+                    return BadRequest(string.Join(" - ", msgValidacao));
                 }
 
 

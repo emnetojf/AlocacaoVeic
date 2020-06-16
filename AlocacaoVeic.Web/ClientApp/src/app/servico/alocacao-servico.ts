@@ -25,7 +25,7 @@ export class AlocacaoServico {
   }
 
   public deleteAlocacao(alocacao: Alocacao): Observable<Alocacao[]> {
-    return this.http.post<Alocacao[]>(this.baseURL + 'api/alocacao/delete', JSON.stringify(alocacao), { headers: this.headers })
+    return this.http.post<Alocacao[]>(this.baseURL + 'api/alocacao/deletar', JSON.stringify(alocacao), { headers: this.headers })
   }
 
   public listaAlocacoes(): Observable<Alocacao[]> {

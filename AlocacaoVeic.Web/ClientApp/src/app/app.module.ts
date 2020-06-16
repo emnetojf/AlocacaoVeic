@@ -15,11 +15,13 @@ import { PesqVeicComp } from './veiculo/pesquisa/pesq-veic-comp';
 import { CadVeicComp } from './veiculo/cadastro/cad-veic-comp';
 import { CadAlocComp } from './alocacao/alocacao/cad-aloc-comp';
 import { EditAlocComp } from './alocacao/alocacao/editar/edit-aloc-comp';
+import { ExcluirAlocComp } from './alocacao/alocacao/excluir/excluir-aloc-comp';
 import { PesqAlocComp } from './alocacao/pesquisa/pesq-aloc-comp';
 import { PesqVeicAlocComp } from './alocacao/pesquisa-veiculos/pesq-veic-aloc-comp';
 import { UsuarioServico } from './servico/usuario-servico';
 import { VeiculoServico } from './servico/veiculo-servico';
 import { AlocacaoServico } from './servico/alocacao-servico';
+
 
 
 @NgModule({
@@ -36,6 +38,7 @@ import { AlocacaoServico } from './servico/alocacao-servico';
     CadAlocComp,
     EditAlocComp,
     PesqVeicAlocComp,
+    ExcluirAlocComp,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -52,6 +55,7 @@ import { AlocacaoServico } from './servico/alocacao-servico';
       { path: 'pesq-aloc', component: PesqAlocComp },
       { path: 'cad-aloc', component: CadAlocComp },
       { path: 'edit-aloc', component: EditAlocComp },
+      { path: 'del-aloc', component: ExcluirAlocComp },
       { path: 'pesq-veic-aloc', component: PesqVeicAlocComp }, 
     ])
   ],

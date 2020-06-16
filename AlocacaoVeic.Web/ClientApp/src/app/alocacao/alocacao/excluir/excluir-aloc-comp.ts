@@ -9,12 +9,12 @@ import { VeiculoServico } from '../../../servico/veiculo-servico';
 import { match } from 'assert';
 
 @Component({
-  selector: "edit-aloc",
-  templateUrl: "./edit-aloc-comp.html",
-  styleUrls: ["./edit-aloc-comp.css"]
+  selector: "del-aloc",
+  templateUrl: "./excluir-aloc-comp.html",
+  styleUrls: ["./excluir-aloc-comp.css"]
 })
 
-export class EditAlocComp implements OnInit {
+export class ExcluirAlocComp implements OnInit {
 
   public veiculo: Veiculo;
   public usuario: Usuario;
@@ -38,25 +38,20 @@ export class EditAlocComp implements OnInit {
 
   ngOnInit(): void {
 
-    var editlocacao = sessionStorage.getItem('editAlocacao');
-    if (editlocacao) {
-      this.alocacao = JSON.parse(editlocacao);
+    var excluirlocacao = sessionStorage.getItem('delAlocacao');
+    if (excluirlocacao) {
+      this.alocacao = JSON.parse(excluirlocacao);
 
       this.veiculoserv.listaVeiculo(this.alocacao.veiculoId).subscribe(
         veic => {
           this.veiculo = veic;
 
-
           console.log(this.alocacao);
           console.log(this.veiculo);
 
-          let data = (document.getElementById("dtfim") as HTMLInputElement);
-          data.value = String(this.alocacao.dtFim.toString().split('T')[0]);
-
           this.Total = 0;
           this.calcularTotal();
-
-
+  
         },
         e => {
           console.log(e.error);
@@ -73,64 +68,33 @@ export class EditAlocComp implements OnInit {
 
 
   public calcularTotal() {
-
-    var dtFim = (document.getElementById("dtfim") as HTMLInputElement).value;
-
-    this.dtfinal = new Date(dtFim);
-
+        
     this.dtinicial = new Date(this.alocacao.dtInicio.toString())
+    this.dtfinal = new Date(this.alocacao.dtFim.toString());
+
 
     const diff = this.dtfinal.getTime() - Math.abs(this.dtinicial.getTime());
     const dias = Math.ceil(diff / (1000 * 60 * 60 * 24));
 
-    if (dias < 0 || dtFim == "") {
-      this.Total = 0;
-    }
-    else {
-
-      if (dias == 0) {
-        this.Total = this.veiculo.douPreco;
-      }
-      else {
-        console.log(this.veiculo.douPreco);
-        console.log(dias);
-        this.Total = this.veiculo.douPreco * dias;
-      }
-    }
+    console.log(this.veiculo.douPreco);
+    console.log(dias);
+    this.Total = this.veiculo.douPreco * dias;
+    
   }
 
 
 
-  public realizaAlocacao() {
+  public excluiAlocacao() {
     this.ativar_spinner = true;
 
-    this.alocacao.dtFim = this.dtfinal;
+    this.veiculo.booALOCADO = false
 
-    this.veiculo.booALOCADO = true
+    console.log(this.alocacao);
+    console.log(this.veiculo);
 
-    this.alocacaoserv.cadastroAlocacao(this.alocacao).subscribe(
-      veicAloc => {
-        console.log(this.alocacao);
-
-
-        this.veiculoserv.cadastroVeiculo(this.veiculo).subscribe(
-          veicAlocado => {
-          },
-          e => {
-            console.log(e.error);
-            this.ativar_spinner = false;
-            this.msgErro = e.error;
-            this.notificacao.showErro("Ocorreu um erro!", "Erro");
-          }
-        );
-
-        this.msgErro = "";
-        this.ativar_spinner = false;
-
-        this.notificacao.showSucesso("Veículo alocado com sucesso", "Sucesso");
-
-        sessionStorage.setItem("editAlocacao", "");
-        this.router.navigate(['/pesq-aloc']);
+    
+    this.veiculoserv.cadastroVeiculo(this.veiculo).subscribe(
+      veicAlocado => {
       },
       e => {
         console.log(e.error);
@@ -139,11 +103,32 @@ export class EditAlocComp implements OnInit {
         this.notificacao.showErro("Ocorreu um erro!", "Erro");
       }
     );
+
+    this.alocacaoserv.deleteAlocacao(this.alocacao).subscribe(
+      veicAloc => {
+
+        this.msgErro = "";
+        this.ativar_spinner = false;
+
+        this.notificacao.showAtencao("Alocação excluída com sucesso!", "Excluído")
+
+        sessionStorage.setItem("delAlocacao", "");
+        this.router.navigate(['/pesq-aloc']);
+
+      },
+      e => {
+        console.log(e.error);
+        this.ativar_spinner = false;
+        this.msgErro = e.error;
+        this.notificacao.showErro("Ocorreu um erro!", "Erro");
+      }
+    );
+    
   }
 
 
   public cancelarVeiculo() {
-    sessionStorage.setItem('editAlocacao', "");
+    sessionStorage.setItem('delAlocacao', "");
     this.router.navigate(['/pesq-aloc']);
   }
 

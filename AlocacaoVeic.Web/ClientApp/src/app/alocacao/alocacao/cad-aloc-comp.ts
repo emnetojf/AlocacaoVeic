@@ -6,6 +6,7 @@ import { Usuario } from '../../modelo/usuario';
 import { AlocacaoServico } from '../../servico/alocacao-servico';
 import { NotificacaoServico } from '../../servico/notificacao-servico';
 import { VeiculoServico } from '../../servico/veiculo-servico';
+import { UsuarioServico } from '../../servico/usuario-servico';
 
 @Component({
   selector: "cad-aloc",
@@ -26,44 +27,52 @@ export class CadAlocComp implements OnInit {
   public msgErro: string;
 
 
-  constructor(private alocacaoserv: AlocacaoServico,
-              private notificacao: NotificacaoServico, private veiculoserv: VeiculoServico,
-              private router: Router) {
-    
+  constructor(private alocacaoserv: AlocacaoServico, private usuarioServico: UsuarioServico,
+    private notificacao: NotificacaoServico, private veiculoserv: VeiculoServico,
+    private router: Router) {
+
   }
 
-  ngOnInit(): void {    
-    
+  ngOnInit(): void {
+    this.usuario = this.usuarioServico.Usuario;
     var veiculoAlocacao = sessionStorage.getItem("veicAlocacao");
 
     if (veiculoAlocacao) {
       this.veiculo = JSON.parse(veiculoAlocacao);
       this.hoje = new Date();
-      this.dtfinal = new Date();
+      //this.dtfinal = new Date();
       this.Total = 0;
 
       console.log(this.veiculo);
-    } 
+    }
   }
 
- 
+
 
 
 
   calcularTotal() {
 
     var data = (document.getElementById("dtfim") as HTMLInputElement).value;
-        
+
     this.dtfinal = new Date(data);
 
     const diff = this.dtfinal.getTime() - Math.abs(this.hoje.getTime())
     const dias = Math.ceil(diff / (1000 * 60 * 60 * 24));
 
-    if (dias <= 0 || data == "") {
+    if (dias < 0 || data == "") {
       this.Total = 0;
     }
     else {
-      this.Total = this.veiculo.douPreco * dias;    
+
+      if (dias == 0) {
+        this.Total = this.veiculo.douPreco;
+      }
+      else {
+        console.log(this.veiculo.douPreco);
+        console.log(dias);
+        this.Total = this.veiculo.douPreco * dias;
+      }
     }
   }
 
@@ -79,6 +88,7 @@ export class CadAlocComp implements OnInit {
     alocacao.dtInicio = this.hoje;
     alocacao.dtFim = this.dtfinal;
 
+    console.log(this.veiculo);
     this.veiculo.booALOCADO = true
 
     this.alocacaoserv.cadastroAlocacao(alocacao).subscribe(
@@ -111,13 +121,13 @@ export class CadAlocComp implements OnInit {
         this.msgErro = e.error;
         this.notificacao.showErro("Ocorreu um erro!", "Erro");
       }
-    ); 
+    );
   }
 
 
   public cancelarVeiculo() {
-    sessionStorage.setItem("veicAlocacao", "");   
-    this.router.navigate(['/pesq-veic-aloc']);    
+    sessionStorage.setItem("veicAlocacao", "");
+    this.router.navigate(['/pesq-veic-aloc']);
   }
 
 }

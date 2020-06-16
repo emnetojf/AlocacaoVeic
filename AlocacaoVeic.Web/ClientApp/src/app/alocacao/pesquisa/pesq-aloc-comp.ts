@@ -58,6 +58,6 @@ export class PesqAlocComp implements OnInit {
 
   public deletarAlocacao(alocacao: Alocacao) {
     sessionStorage.setItem("delAlocacao", JSON.stringify(alocacao))
-    this.router.navigate(["/cad-aloc"])
+    this.router.navigate(["/del-aloc"])
   }
 }
