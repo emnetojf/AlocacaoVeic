@@ -3,7 +3,7 @@ import { Usuario } from "./usuario";
 
 export class Alocacao {
   idAlocacao: number;
-  UsuarioId: number;
+  usuarioId: number;
   Usuario: Usuario;
   veiculoId: number;
   Veiculo: Veiculo;

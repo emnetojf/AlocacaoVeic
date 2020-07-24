@@ -154,7 +154,7 @@ namespace AlocacaoVeic.Web.Controllers
         private static string GerarNovoNomeArq(string nomeArq, string extArq)
         {
             var nomeCompacto = Path.GetFileNameWithoutExtension(nomeArq).Take(10).ToArray();
-            var novoNomeArq = new string(nomeCompacto).Replace(" ", "-") + "." + extArq;
+            var novoNomeArq = new string(nomeCompacto).Replace(" ", "-");
             novoNomeArq = $"{novoNomeArq}_{DateTime.Now.Day}-{DateTime.Now.Month}-{DateTime.Now.Year}-{DateTime.Now.Hour}{DateTime.Now.Minute}{DateTime.Now.Second}.{extArq}";
             return novoNomeArq;
         }

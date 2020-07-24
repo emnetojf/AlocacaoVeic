@@ -8,7 +8,7 @@ import { VeiculoServico } from '../../servico/veiculo-servico';
 
 @Component({
   selector: "pesq-aloc",
-  templateUrl: "./pesq-aloc-comp.html",     
+  templateUrl: "./pesq-aloc-comp.html",
   styleUrls: ["./pesq-aloc-comp.css"]
 })
 
@@ -18,34 +18,71 @@ export class PesqAlocComp implements OnInit {
 
   public alocacoes: Alocacao[];
   public veiculo: Veiculo;
+  public desabilitaBotao: boolean;
+
 
   constructor(private alocacaoserv: AlocacaoServico, private veiculoserv: VeiculoServico, private router: Router) {
 
+    const hoje = new Date() //.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+
+    
     this.alocacaoserv.listaAlocacoes().subscribe(
       alocacoes => {
+
         this.alocacoes = alocacoes;
-        
+
+
+        for (let aloc of this.alocacoes) {
+
+          //this.desabilitaBotao = true;
+
+          this.veiculoserv.listaVeiculo(aloc.veiculoId).subscribe(
+            veicAloc => {
+
+              aloc.Veiculo = veicAloc;
+
+              const dtFim = aloc.dtFim.toString().split('T')[0]
+              const dtFimFormat = new Date(dtFim);
+
+              if (dtFimFormat.getTime() < hoje.getTime()) {
+
+                aloc.Veiculo.booALOCADO = false;
+
+                this.desabilitaBotao = true          
+
+                this.veiculoserv.cadastroVeiculo(aloc.Veiculo).subscribe(
+                  veicUpd => {
+
+                  },
+                  e => {
+                    console.log(e.error);
+                  }
+                );
+
+              }
+
+            },
+            e => {
+              console.log(e.error);
+            }
+          );
+
+        }
+
       },
       e => {
         console.log(e.error);
       }
-    )
+    );
 
-    //for (let aloc of this.alocacoes) {
+  }
 
-    //  this.veiculoserv.listaVeiculo(aloc.VeiculoId).subscribe(
-    //    veic => {
-    //      this.veiculo = veic;          
-    //    }
-    //  )      
-
-    //}    
+  
+  ngOnInit(): void {    
     
   }
 
-  ngOnInit(): void {
-
-  }
+    
 
   public adicionaAlocacao() {
     this.router.navigate(["/pesq-veic-aloc"])

@@ -45,6 +45,7 @@ namespace AlocacaoVeic.Web.Controllers
 
                 return Json(_alocacaoRepos.ListAll());
             }
+
             catch (Exception ex)
             {
 

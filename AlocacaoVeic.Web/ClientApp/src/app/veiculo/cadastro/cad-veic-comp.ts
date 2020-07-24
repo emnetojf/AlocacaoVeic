@@ -76,7 +76,15 @@ export class CadVeicComp implements OnInit {
         this.veicDelete = false;
         this.ativar_spinner = false;
         this.msgErro = e.error;
-        this.notificacao.showErro("Ocorreu um erro!", "Erro");
+
+        let msgPreenchimento = this.msgErro.substring(0, 7);
+
+        if (msgPreenchimento === "Informe") {
+          this.notificacao.showAtencao("Por favor preencha os campos!", "Atenção");
+        } else {
+          this.notificacao.showErro("Ocorreu um erro!", "Erro");
+        }
+
       }
     )
   };

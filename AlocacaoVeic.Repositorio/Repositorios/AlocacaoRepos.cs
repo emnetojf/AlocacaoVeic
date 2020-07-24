@@ -2,6 +2,7 @@
 using AlocacaoVeic.Dominio.Entidades;
 using AlocacaoVeic.Repositorio.Contexto;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,9 +17,7 @@ namespace AlocacaoVeic.Repositorio.Repositorios
 
         public IEnumerable<Alocacao> listaAlocacoes()
         {
-           return _alocacaoContext.Alocacoes
-                                  .Include(a => a.Veiculo)
-                                  .ToList();
+           return _alocacaoContext.Alocacoes.Include(a => a.Veiculo).ToList();
         }
     }
 }

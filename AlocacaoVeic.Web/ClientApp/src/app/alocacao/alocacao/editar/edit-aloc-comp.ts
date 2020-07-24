@@ -23,7 +23,6 @@ export class EditAlocComp implements OnInit {
   public dtfinal: Date;
   public Total: number;
 
-  public validaAloc: boolean;
 
   public ativar_spinner: boolean;
   public msgErro: string;
@@ -42,29 +41,39 @@ export class EditAlocComp implements OnInit {
     if (editlocacao) {
       this.alocacao = JSON.parse(editlocacao);
 
-      this.veiculoserv.listaVeiculo(this.alocacao.veiculoId).subscribe(
-        veic => {
-          this.veiculo = veic;
+      console.log(this.alocacao);
+
+      let data = (document.getElementById("dtfim") as HTMLInputElement);
+      data.value = this.alocacao.dtFim.toString().split('T')[0]
+
+      this.Total = 0; 
+      this.calcularTotal();
 
 
-          console.log(this.alocacao);
-          console.log(this.veiculo);
 
-          let data = (document.getElementById("dtfim") as HTMLInputElement);
-          data.value = String(this.alocacao.dtFim.toString().split('T')[0]);
-
-          this.Total = 0;
-          this.calcularTotal();
+      //this.veiculoserv.listaVeiculo(this.alocacao.veiculoId).subscribe(
+      //  veic => {
+      //    //this.veiculo = veic;
 
 
-        },
-        e => {
-          console.log(e.error);
-          this.ativar_spinner = false;
-          this.msgErro = e.error;
-          this.notificacao.showErro("Ocorreu um erro!", "Erro");
-        }
-      );
+      //    console.log(this.alocacao);
+      //    console.log(this.veiculo);
+
+      //    let data = (document.getElementById("dtfim") as HTMLInputElement);
+      //    data.value = this.alocacao.dtFim.toString().split('T')[0] 
+
+      //    this.Total = 0; 
+      //    this.calcularTotal();
+          
+
+      //  },
+      //  e => {
+      //    console.log(e.error);
+      //    this.ativar_spinner = false;
+      //    this.msgErro = e.error;
+      //    this.notificacao.showErro("Ocorreu um erro!", "Erro");
+      //  }
+      //);
 
            
     }
@@ -74,7 +83,7 @@ export class EditAlocComp implements OnInit {
 
   public calcularTotal() {
 
-    var dtFim = (document.getElementById("dtfim") as HTMLInputElement).value;
+    var dtFim =  (document.getElementById("dtfim") as HTMLInputElement).value;
 
     this.dtfinal = new Date(dtFim);
 
@@ -83,18 +92,18 @@ export class EditAlocComp implements OnInit {
     const diff = this.dtfinal.getTime() - Math.abs(this.dtinicial.getTime());
     const dias = Math.ceil(diff / (1000 * 60 * 60 * 24));
 
-    if (dias < 0 || dtFim == "") {
+    if (dias < 0 || dtFim == null) {
       this.Total = 0;
     }
     else {
 
       if (dias == 0) {
-        this.Total = this.veiculo.douPreco;
+        this.Total = this.alocacao.Veiculo.douPreco; 
       }
       else {
-        console.log(this.veiculo.douPreco);
+        console.log(this.alocacao.Veiculo.douPreco); 
         console.log(dias);
-        this.Total = this.veiculo.douPreco * dias;
+        this.Total = this.alocacao.Veiculo.douPreco * dias;  
       }
     }
   }
@@ -104,17 +113,32 @@ export class EditAlocComp implements OnInit {
   public realizaAlocacao() {
     this.ativar_spinner = true;
 
-    this.alocacao.dtFim = this.dtfinal;
+    let alocEdit = new Alocacao();
 
-    this.veiculo.booALOCADO = true
+    alocEdit.idAlocacao = this.alocacao.idAlocacao;
+    alocEdit.usuarioId = this.alocacao.usuarioId;
+    alocEdit.veiculoId = this.alocacao.veiculoId;
+    alocEdit.dtInicio = this.alocacao.dtInicio;
+    alocEdit.dtFim = this.dtfinal;
 
-    this.alocacaoserv.cadastroAlocacao(this.alocacao).subscribe(
+    let veicEdit = new Veiculo()
+    veicEdit = this.alocacao.Veiculo;
+    veicEdit.booALOCADO = true
+    
+    this.alocacaoserv.cadastroAlocacao(alocEdit).subscribe(
       veicAloc => {
-        console.log(this.alocacao);
 
+        console.log(veicAloc);
 
-        this.veiculoserv.cadastroVeiculo(this.veiculo).subscribe(
-          veicAlocado => {
+        this.veiculoserv.cadastroVeiculo(veicEdit).subscribe(
+          veic => {
+            this.msgErro = "";
+            this.ativar_spinner = false;
+
+            this.notificacao.showSucesso("Veículo alocado com sucesso", "Sucesso");
+
+            sessionStorage.setItem("editAlocacao", "");
+            this.router.navigate(['/pesq-aloc']);
           },
           e => {
             console.log(e.error);
@@ -124,13 +148,6 @@ export class EditAlocComp implements OnInit {
           }
         );
 
-        this.msgErro = "";
-        this.ativar_spinner = false;
-
-        this.notificacao.showSucesso("Veículo alocado com sucesso", "Sucesso");
-
-        sessionStorage.setItem("editAlocacao", "");
-        this.router.navigate(['/pesq-aloc']);
       },
       e => {
         console.log(e.error);
@@ -138,7 +155,7 @@ export class EditAlocComp implements OnInit {
         this.msgErro = e.error;
         this.notificacao.showErro("Ocorreu um erro!", "Erro");
       }
-    );
+    );   
   }
 
 
@@ -148,3 +165,29 @@ export class EditAlocComp implements OnInit {
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -21,8 +21,8 @@
       <td style="width:40%;">{{v.strModelo}}</td>
       <td>{{v.douPreco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}}</td>
       <td> <img style="width:60%; height:30%" src="../../../../../arquivos/{{v.strNomeArq}}" /></td>
-      <td><button class="btn btn-warning btn-sm" (click)="editarVeiculo(v)">Editar</button></td>
-      <td><button class="btn btn-danger btn-sm" (click)="deletarVeiculo(v)">Excluir</button></td>
+      <td><button class="btn btn-warning btn-sm" (click)="editarVeiculo(v)"  [disabled]="desabilitaBotao">Editar</button></td>
+      <td><button class="btn btn-danger btn-sm" (click)="deletarVeiculo(v)"  [disabled]="desabilitaBotao">Excluir</button></td>
     </tr>
   </tbody>
 

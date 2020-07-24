@@ -4,6 +4,8 @@
   <button class="btn btn-primary mb-4" (click)="adicionaAlocacao()">Veículos Alocação</button>
 
 
+  
+
   <table class="table table-hover" *ngIf="alocacoes">
     <thead>
       <tr>
@@ -13,19 +15,17 @@
         <th>Data Fim</th>
         <th></th>
         <th></th>
-        <th></th>
-        <th></th>
+        <th></th>        
       </tr>
     </thead>
 
     <tbody>
       <tr *ngFor="let a of alocacoes">
-        <td></td>
-        <td></td>
+        <td>{{a.Veiculo.strPlaca}}</td>
+        <td>{{a.Veiculo.strModelo}}</td>
         <td>{{a.dtInicio | date:'dd-MM-yyyy' }}</td>
         <td>{{a.dtFim | date:'dd-MM-yyyy'}}</td>
-        <td><img style="width:60%; height:30%" src="../../../../../arquivos/" /></td>
-        <td></td>
+        <td><img style="width:30%; height:30%" src="../../../../../arquivos/{{a.Veiculo.strNomeArq}}" /></td>
         <td><button class="btn btn-warning btn-sm" (click)="editarAlocacao(a)">Editar</button></td>
         <td><button class="btn btn-danger btn-sm" (click)="deletarAlocacao(a)">Excluir</button></td>
       </tr>
